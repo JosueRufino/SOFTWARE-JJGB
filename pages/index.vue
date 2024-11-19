@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="containe">
     <div class="content-img">
       <div class="overlay"></div>
@@ -9,6 +10,12 @@
         </div>
         <div class="card mt" style="width: 400px; height: 70vh;">jjj</div>
       </div>
+=======
+    <div>
+      <h1>Welcome to the JJGB LIBRARY</h1>
+      <h1>Genilson</h1>
+      <h1>Genilson partiu a Clavícula</h1>
+>>>>>>> c7826418f9968d88d6f488015b9708861d4c1691
     </div>
   </div>
 </template>
