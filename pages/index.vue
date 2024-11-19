@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="containe">
     <div class="content-img">
       <div class="overlay"></div>
@@ -8,14 +7,38 @@
           <h1>BIBLIOTECA JJGB</h1>
           <p>Bem-vindo ao sistema</p>
         </div>
-        <div class="card mt" style="width: 400px; height: 70vh;">jjj</div>
+        <div class="card p-3" style="width: 400px; height: 70vh">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h3>Login</h3>
+              <p>Identifique-se para prosseguir</p>
+            </div>
+            <div>
+              <img src="../public/assets/image2.png" alt="" />
+            </div>
+          </div>
+          <form>
+            <div>
+              <span>Insira o seu email</span>
+              <input type="text" aria-label="First name" class="form-control" />
+            </div>
+            <div>
+              <span>Insira a sua senha</span>
+              <input
+                type="password"
+                aria-label="First name"
+                class="form-control"
+              />
+            </div>
+            <div>
+              <span>Esqueceu a sua senha?</span>
+            </div>
+            <div>
+              <button class="btn btn-primary w-100">Entrar</button>
+            </div>
+          </form>
+        </div>
       </div>
-=======
-    <div>
-      <h1>Welcome to the JJGB LIBRARY</h1>
-      <h1>Genilson</h1>
-      <h1>Genilson partiu a Clavícula</h1>
->>>>>>> c7826418f9968d88d6f488015b9708861d4c1691
     </div>
   </div>
 </template>
