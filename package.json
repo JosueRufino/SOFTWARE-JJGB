@@ -5,6 +5,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "json-server": "json-server --watch db.json --port 3001",
+    "start": "concurrently \"npm run dev\" \"npm run json-server\"",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -18,5 +20,8 @@
     "pinia": "^2.2.6",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }

@@ -1,0 +1,74 @@
+{
+  "livros": [
+    {
+      "id": 1,
+      "titulo": "Dom Quixote",
+      "autor": "Miguel de Cervantes",
+      "isbn": "978-3-16-148410-0",
+      "ano_publicacao": 1605,
+      "quantidade_disponivel": 3,
+      "subcategoria_id": 1
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nome": "Literatura"
+    }
+  ],
+  "subcategorias": [
+    {
+      "id": 1,
+      "categoria_id": 1,
+      "nome": "Clássicos"
+    }
+  ],
+  "estudantes": [
+    {
+      "id": 1,
+      "nome": "João Silva",
+      "matricula": "20230001",
+      "email": "joao.silva@exemplo.com"
+    }
+  ],
+  "funcionarios": [
+    {
+      "id": 1,
+      "nome": "Maria Santos",
+      "email": "maria.santos@exemplo.com",
+      "senha": "senha123"
+    }
+  ],
+  "emprestimos": [
+    {
+      "id": 1,
+      "livro_id": 1,
+      "estudante_id": 1,
+      "data_emprestimo": "2024-11-01",
+      "data_devolucao": "2024-11-15",
+      "data_devolvida": null,
+      "status": "em andamento"
+    }
+  ],
+  "filaEspera": [
+    {
+      "id": 1,
+      "livro_id": 1,
+      "estudante_id": 1,
+      "posicao": 1,
+      "notificado": false
+    }
+  ],
+  "alertas": [
+    {
+      "id": 1,
+      "tipo": "Devolução Pendente",
+      "mensagem": "O prazo de devolução do livro 'Dom Quixote' termina em 2 dias.",
+      "data_criacao": "2024-11-13",
+      "estudante_id": 1,
+      "funcionario_id": null,
+      "livro_id": 1,
+      "lido": false
+    }
+  ]
+}
