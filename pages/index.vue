@@ -17,24 +17,37 @@
               <img src="../public/assets/image2.png" alt="" />
             </div>
           </div>
-          <form>
+          <form @submit.prevent="handleLogin">
             <div>
               <span>Insira o seu email</span>
-              <input type="text" aria-label="First name" class="form-control" />
+              <input
+                v-model="email"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                required
+              />
             </div>
             <div>
               <span>Insira a sua senha</span>
               <input
+                v-model="password"
                 type="password"
-                aria-label="First name"
                 class="form-control"
+                placeholder="Senha"
+                required
               />
             </div>
             <div>
               <span>Esqueceu a sua senha?</span>
             </div>
+            <div v-if="errorMessage" class="text-danger">
+              <span>{{ errorMessage }}</span>
+            </div>
             <div>
-              <button class="btn btn-primary w-100">Entrar</button>
+              <button type="submit" class="btn btn-primary w-100">
+                Entrar
+              </button>
             </div>
           </form>
         </div>
@@ -43,7 +56,28 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useAuthStore } from "~/store/auth/auth"; // Importa a store de autenticação
+import { useRouter } from "vue-router"; // Para navegação
+
+const email = ref("");
+const password = ref("");
+const errorMessage = ref("");
+
+const authStore = useAuthStore();
+const router = useRouter();
+
+const handleLogin = async () => {
+  try {
+    // Tenta realizar o login com o email e senha
+    await authStore.login(email.value, password.value);
+    router.push("/funcionario"); // Redireciona para a página principal
+  } catch (error) {
+    errorMessage.value = "Credenciais inválidas. Tente novamente."; // Exibe erro
+  }
+};
+</script>
 
 <style scoped>
 * {
