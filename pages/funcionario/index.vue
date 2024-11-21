@@ -11,7 +11,7 @@
     </div>
 
     <!-- Gráfico -->
-    <div class="card p-3 w-100">
+    <div class="card p-3 w-100 mt-4">
       <DashboardBarChart
         class="w-100"
         chart-id="responsiveChart"
@@ -21,9 +21,8 @@
       />
     </div>
 
-    <!-- Outras Colunas -->
-    <div class="row w-100 p-3">
-      <div class="col-12 col-md-6 card p-5">
+    <div class="w-100 mt-3">
+      <div class="p-3 card">
         <DashboardPizzaChart
           chart-id="pieChart"
           :width="'100%'"
@@ -31,7 +30,11 @@
           :data="chartData"
         />
       </div>
-      <div class="col-12 col-md-6 card"><DashboardLineChart/></div>
+    </div>
+    <div class="w-100 mt-3">
+      <div class="p-3 card">
+        <DashboardLineChart />
+      </div>
     </div>
   </div>
 </template>
@@ -46,32 +49,38 @@ import { reactive } from "vue";
 // Definindo as opções do gráfico
 const chartOptions = reactive({
   title: {
-    text: "Exemplo de ECharts",
+    text: "Estatistica geral",
   },
   tooltip: {},
   legend: {
-    data: ["Vendas"],
+    data: ["Geral"],
   },
   xAxis: {
-    data: ["Camisas", "Cardigans", "Chiffons", "Calças", "Saltos", "Meias"],
+    data: [
+      "Funcionários",
+      "Estudantes",
+      "Livros",
+      "Lista de espera",
+      "Livros emprestados",
+    ],
   },
   yAxis: {},
   series: [
     {
-      name: "Vendas",
+      name: "Geral",
       type: "bar",
-      data: [5, 20, 36, 10, 10, 20],
+      data: [5, 20, 36, 10, 10],
     },
   ],
 });
 
 // Dados para o gráfico
 const chartData = reactive([
-  { value: 1048, name: "Search Engine" },
-  { value: 735, name: "Direct" },
-  { value: 580, name: "Email" },
-  { value: 484, name: "Union Ads" },
-  { value: 300, name: "Video Ads" },
+  { value: 1048, name: "Funcionários" },
+  { value: 735, name: "Estudantes" },
+  { value: 580, name: "Livros" },
+  { value: 484, name: "Lista de espera" },
+  { value: 300, name: "Livros emprestados" },
 ]);
 </script>
 

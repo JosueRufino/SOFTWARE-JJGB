@@ -5,12 +5,12 @@
       <Sidebar />
     </div>
     <div class="main-content">
-      <header class="navbar">
+      <div>
         <Navbar />
-      </header>
+      </div>
       <div class="content">
         <!-- Conteúdo principal do dashboard -->
-        <p>Bem-vindo ao Dashboard!</p>
+        <h5 class="fw-bold">Bem-vindo ao Dashboard!</h5>
         <slot />
       </div>
     </div>
@@ -28,8 +28,8 @@ export default {
   display: flex;
   height: 100vh;
   background-color: #f2f2f2;
-  padding: 20px;
   gap: 20px; /* Espaçamento entre sidebar e conteúdo */
+  overflow: hidden;
 }
 
 .sidebar {
@@ -37,7 +37,7 @@ export default {
   border-radius: 8px;
   height: 100%;
   flex-shrink: 0; /* Impede que a sidebar encolha */
-  width: 250px; /* Tamanho fixo ou ajustável */
+  width: 280px; /* Tamanho fixo ou ajustável */
   overflow-y: auto; /* Adiciona rolagem se o conteúdo for maior que a tela */
 }
 
@@ -56,7 +56,7 @@ export default {
 }
 
 .content {
-  height: 100vh;
+  height: 80vh;
   overflow-y: auto;
   border-radius: 8px;
   flex-grow: 1;
