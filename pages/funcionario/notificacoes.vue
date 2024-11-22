@@ -1,7 +1,6 @@
 <template>
-    <h1>teste</h1>
+  <h1>Notificações</h1>
 </template>
-
 <script setup>
 definePageMeta({
   layout: "funcionario",

@@ -20,17 +20,17 @@
     </div>
     <div class="sidebar-menu">
       <ul class="sidebar-nav">
-        <li
-          class="sidebar-nav-item"
-          :class="route.path === link.path ? 'active' : 'sidebar-nav-item'"
-          v-for="(link, i) in links"
-          :key="i"
-        >
-          <a href="#" class="sidebar-nav-link">
-            <i :class="link.icon"></i>
-            <span>{{ link.name }}</span>
-          </a>
-        </li>
+        <NuxtLink v-for="(link, i) in links" :key="i" :to="link.path" style="text-decoration: none;">
+          <li
+            class="sidebar-nav-item"
+            :class="route.path === link.path ? 'active' : 'sidebar-nav-item'"
+          >
+            <a href="#" class="sidebar-nav-link">
+              <i :class="link.icon"></i>
+              <span>{{ link.name }}</span>
+            </a>
+          </li>
+        </NuxtLink>
       </ul>
     </div>
   </div>
@@ -67,7 +67,7 @@ const links = [
   {
     name: "Ajuda e Suporte",
     icon: "bi bi-question-circle",
-    path: "/funcionario/ajuda",
+    path: "/funcionario/ajuda_e_suporte",
   },
 ];
 </script>
@@ -130,7 +130,7 @@ const links = [
 
 .active {
   background-color: #2596be;
-  .sidebar-nav-link{
+  .sidebar-nav-link {
     color: white;
   }
 }

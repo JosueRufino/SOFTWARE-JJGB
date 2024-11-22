@@ -10,17 +10,15 @@
       </div>
       <div class="content">
         <!-- Conteúdo principal do dashboard -->
-        <h5 class="fw-bold">Bem-vindo ao Dashboard!</h5>
+        <h5 class="fw-bold" v-if="route.path === '/funcionario'">Bem-vindo ao Dashboard!</h5>
         <slot />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Dashboard",
-};
+<script setup>
+const route = useRoute();
 </script>
 
 <style scoped>
@@ -37,7 +35,7 @@ export default {
   border-radius: 8px;
   height: 100%;
   flex-shrink: 0; /* Impede que a sidebar encolha */
-  width: 280px; /* Tamanho fixo ou ajustável */
+  width: 250px; /* Tamanho fixo ou ajustável */
   overflow-y: auto; /* Adiciona rolagem se o conteúdo for maior que a tela */
 }
 

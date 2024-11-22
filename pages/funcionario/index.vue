@@ -2,10 +2,10 @@
   <div>
     <!-- Seção de Cards -->
     <div class="text-center">
-      <div class="row gx-3">
+      <div class="row gx-1">
         <!-- Usando gx-3 para espaçamento adequado -->
-        <div class="col-12 col-md-3" v-for="i in 4" :key="i">
-          <div class="p-1"><DashboardCard title="Livros" :count="15" /></div>
+        <div class="col-12 col-md-3" v-for="(data, i) in dataCards" :key="i">
+          <div class="p-1"><DashboardCard :data="data" /></div>
         </div>
       </div>
     </div>
@@ -45,6 +45,51 @@ definePageMeta({
 });
 
 import { reactive } from "vue";
+
+const dataCards = [
+  {
+    name: "Livros",
+    icon: "bi bi-book-fill",
+    value: 15,
+  },
+  {
+    name: "Funcionários",
+    icon: "bi bi-file-person-fill",
+    value: 15,
+  },
+  {
+    name: "Estudantes",
+    icon: "bi bi-person",
+    value: 15,
+  },
+  {
+    name: "Categorias",
+    icon: "bi bi-bookmark-check-fill",
+    value: 15,
+  },
+  {
+    name: "Subcategorias",
+    icon: "bi bi-tags-fill",
+    value: 15,
+  },
+  {
+    name: "Lista de espera",
+    icon: "bi bi-card-checklist",
+    value: 15,
+  },
+  {
+    name: "Livros emprestados",
+    icon: "bi bi-list-check",
+    value: 15,
+  },
+  {
+    name: "Notificações",
+    icon: "bi bi-bell-fill",
+    value: 15,
+  },
+];
+
+
 
 // Definindo as opções do gráfico
 const chartOptions = reactive({
