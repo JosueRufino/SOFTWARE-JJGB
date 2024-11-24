@@ -2,12 +2,66 @@
   "livros": [
     {
       "id": "1",
-      "titulo": "Dom Quixote",
+      "titulo": "Brilho",
       "autor": "Miguel de Cervantes",
+      "imagem": "/uploads/livros/book1.png",
       "isbn": "978-3-16-148410-0",
       "ano_publicacao": 1605,
       "quantidade_disponivel": 3,
       "subcategoria_id": 1,
+      "status": true,
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "titulo": "Mestres do tempo",
+      "autor": "Miguel de Cervantes",
+      "imagem": "/uploads/livros/book2.png",
+      "isbn": "978-3-16-148410-0",
+      "ano_publicacao": 1605,
+      "quantidade_disponivel": 3,
+      "subcategoria_id": 1,
+      "status": false,
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "titulo": "Vida fora da gangue",
+      "autor": "Miguel de Cervantes",
+      "imagem": "/uploads/livros/book3.png",
+      "isbn": "978-3-16-148410-0",
+      "ano_publicacao": 1605,
+      "quantidade_disponivel": 3,
+      "subcategoria_id": 1,
+      "status": true,
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "4",
+      "titulo": "Bazar dos poetas",
+      "autor": "Miguel de Cervantes",
+      "imagem": "/uploads/livros/book4.png",
+      "isbn": "978-3-16-148410-0",
+      "ano_publicacao": 1605,
+      "quantidade_disponivel": 3,
+      "subcategoria_id": 1,
+      "status": true,
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "5",
+      "titulo": "Sombras",
+      "autor": "Miguel de Cervantes",
+      "imagem": "/uploads/livros/book5.png",
+      "isbn": "978-3-16-148410-0",
+      "ano_publicacao": 1605,
+      "quantidade_disponivel": 3,
+      "subcategoria_id": 1,
+      "status": true,
       "createdAt": "2024-11-01T10:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     }
@@ -95,6 +149,36 @@
       "nome": "Contos",
       "createdAt": "2024-11-01T10:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "d645",
+      "categoria_id": 1,
+      "nome": "josue",
+      "createdAt": "2024-11-24 19:54:59"
+    },
+    {
+      "id": "7919",
+      "categoria_id": 1,
+      "nome": "nova",
+      "createdAt": "2024-11-24 20:04:44"
+    },
+    {
+      "id": "e691",
+      "categoria_id": 7,
+      "nome": "josue",
+      "createdAt": "2024-11-24 20:05:08"
+    },
+    {
+      "nome": "dfdss",
+      "categoria_id": 4,
+      "updatedAt": "2024-11-24 20:18:22",
+      "id": "a39c"
+    },
+    {
+      "nome": "ccds",
+      "categoria_id": 6,
+      "updatedAt": "2024-11-24 20:18:12",
+      "id": "72b7"
     }
   ],
   "estudantes": [

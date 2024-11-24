@@ -19,6 +19,23 @@ export const useCategoryStore = defineStore("category", {
         this.isLoading = false;
       }
     },
+
+    // Buscar uma única subcategoria pelo ID
+    async fetchCategoryById(id) {
+      this.isLoading = true;
+      try {
+        const response = await fetch(`http://localhost:3001/categories/${id}`);
+    
+        this.currentCategory = response;
+        console.log(response, "categoria carregada com sucesso");
+        return response;
+      } catch (error) {
+        console.error("Erro ao buscar categoria:", error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
     async addCategory(newCategory, date) {
       try {
         const category = await $fetch("http://localhost:3001/categories", {

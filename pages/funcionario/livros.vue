@@ -42,8 +42,8 @@
         </div>
       </div>
       <div class="row w-100 gx-5 justify-content-start">
-        <div class="col-3 mb-3" v-for="i in 6" :key="i">
-          <div><LivrosCard /></div>
+        <div class="col-3 mb-3" v-for="(book, i) in books" :key="i">
+          <div><LivrosCard :book="book" /></div>
         </div>
       </div>
       <div class="d-flex justify-content-center mt-3">
@@ -54,9 +54,16 @@
 </template>
 <script setup>
 import { useCategoryStore } from "@/store/category/index";
+import { useBookStore } from "@/store/books/index";
 
+const useBook = useBookStore();
+
+const books = computed(() => useBook.getAllBooks);
+
+onMounted(async () => {
+  await useBook.fetchBooks();
+});
 const props = defineProps({});
-
 
 definePageMeta({
   layout: "funcionario",
