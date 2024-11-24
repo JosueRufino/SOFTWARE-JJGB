@@ -1,74 +1,158 @@
 {
   "livros": [
     {
-      "id": 1,
+      "id": "1",
       "titulo": "Dom Quixote",
       "autor": "Miguel de Cervantes",
       "isbn": "978-3-16-148410-0",
       "ano_publicacao": 1605,
       "quantidade_disponivel": 3,
-      "subcategoria_id": 1
+      "subcategoria_id": 1,
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
   ],
-  "categorias": [
+  "categories": [
     {
-      "id": 1,
-      "nome": "Literatura"
+      "id": "1",
+      "nome": "Literatura",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "2",
+      "nome": "Ciências",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "3",
+      "nome": "História",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "4",
+      "nome": "Arte",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "5",
+      "nome": "Música",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "6",
+      "nome": "Tecnologia",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "7",
+      "nome": "Matemática",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "8",
+      "nome": "Filosofia",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "9",
+      "nome": "Geografia",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": "10",
+      "nome": "Psicologia",
+      "createdAt": "2024-10-01T09:00:00Z",
+      "updatedAt": "2024-10-20T15:00:00Z"
     }
   ],
   "subcategorias": [
     {
-      "id": 1,
+      "id": "1",
       "categoria_id": 1,
-      "nome": "Clássicos"
+      "nome": "Romances",
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "categoria_id": 1,
+      "nome": "Poesia",
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "categoria_id": 1,
+      "nome": "Contos",
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
   ],
   "estudantes": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "João Silva",
       "matricula": "20230001",
-      "email": "joao.silva@exemplo.com"
+      "email": "joao.silva@exemplo.com",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
   ],
   "funcionarios": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Maria Santos",
       "email": "maria.santos@exemplo.com",
-      "senha": "senha123"
+      "senha": "senha123",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
   ],
   "emprestimos": [
     {
-      "id": 1,
+      "id": "1",
       "livro_id": 1,
       "estudante_id": 1,
       "data_emprestimo": "2024-11-01",
       "data_devolucao": "2024-11-15",
       "data_devolvida": null,
-      "status": "em andamento"
+      "status": "em andamento",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
   ],
   "filaEspera": [
     {
-      "id": 1,
+      "id": "1",
       "livro_id": 1,
       "estudante_id": 1,
       "posicao": 1,
-      "notificado": false
+      "notificado": false,
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
   ],
   "alertas": [
     {
-      "id": 1,
+      "id": "1",
       "tipo": "Devolução Pendente",
       "mensagem": "O prazo de devolução do livro 'Dom Quixote' termina em 2 dias.",
       "data_criacao": "2024-11-13",
       "estudante_id": 1,
       "funcionario_id": null,
       "livro_id": 1,
-      "lido": false
+      "lido": false,
+      "createdAt": "2024-11-13T08:00:00Z",
+      "updatedAt": "2024-11-14T10:00:00Z"
     }
   ]
 }

@@ -1,21 +1,63 @@
 <template>
   <div class="row gx-3 vh-100 w-100">
+    <LivrosModalCategory :categorys="categorys" />
+    <LivrosModalSubcategory />
     <div class="col-3">
       <div class="p-1"><LivrosFilter /></div>
     </div>
     <div class="col">
-      <div class="row w-100  gx-5  justify-content-start">
-        <div class="card">
-            nav
+      <div class="card border-0 mb-2" style="height: 50px">
+        <div
+          class="d-flex justify-content-between align-items-center h-100 px-2"
+        >
+          <div>
+            <button type="button" class="btn btn-primary">
+              <i class="bi bi-plus-circle"></i> Novo livro
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop1"
+            >
+              <i class="bi bi-bookmark-check-fill"></i> Categorias
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop2"
+            >
+              <i class="bi bi-tags-fill"></i> Subcategorias
+            </button>
+          </div>
+          <div>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Pesquise um livro"
+            />
+          </div>
         </div>
-        <div class="col-3" v-for="i in 6" :key="i">
-            <div class="p-1">   <LivrosCard /></div>
+      </div>
+      <div class="row w-100 gx-5 justify-content-start">
+        <div class="col-3 mb-3" v-for="i in 6" :key="i">
+          <div><LivrosCard /></div>
         </div>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <Pagination />
       </div>
     </div>
   </div>
 </template>
 <script setup>
+import { useCategoryStore } from "@/store/category/index";
+
+const props = defineProps({});
+
+
 definePageMeta({
   layout: "funcionario",
 });

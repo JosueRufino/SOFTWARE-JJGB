@@ -19,8 +19,10 @@
     "json-server": "^1.0.0-beta.3",
     "nuxt": "^3.14.159",
     "pinia": "^2.2.6",
+    "sweetalert2": "^11.14.5",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue3-toastify": "^0.2.4"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
