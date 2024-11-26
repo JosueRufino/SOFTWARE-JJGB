@@ -39,15 +39,17 @@
               class="form-control"
               id="exampleFormControlInput1"
               placeholder="Pesquise um livro"
+              v-model="searchTerm"
             />
+            
           </div>
         </div>
       </div>
       <div class="row w-100 gx-5 justify-content-start">
         <div
-          v-if="books.length"
+          v-if="filteredBooks.length"
           class="col-3 mb-3"
-          v-for="(book, i) in books"
+          v-for="(book, i) in filteredBooks"
           :key="i"
         >
           <div><LivrosCard :book="book" /></div>
@@ -77,13 +79,24 @@ const books = computed(() => useBook.getAllBooks);
 const categorys = computed(() => useCategory.categories);
 const subcategorys = computed(() => useSubcategory.subcategories);
 
-// Função para busca de livros
-const searchBooks = () => {
-  useBook.filterBooks({
-    author: searchTerm.value,
-  });
-};
+// Computed para filtrar livros
+const filteredBooks = computed(() => {
+  // Se não tiver termo de busca, retorna todos os livros
+  if (!searchTerm.value) return books.value;
 
+  // Converte o termo para minúsculas para busca case-insensitive
+  const searchLower = searchTerm.value.toLowerCase();
+
+  // Filtra os livros 
+  return books.value.filter((book) => {
+    // Adicione aqui os campos que deseja buscar
+    return (
+      book.titulo.toLowerCase().includes(searchLower) ||
+      book.autor.toLowerCase().includes(searchLower)
+      // Adicione mais campos conforme necessário
+    );
+  });
+});
 const query = computed(() => route.query);
 // Função para aplicar os filtros
 const applyQueryFilters = () => {
@@ -113,7 +126,6 @@ onMounted(async () => {
 
   applyQueryFilters();
 });
-
 // Observa mudanças nos parâmetros da query
 watch(
   () => route.query,
