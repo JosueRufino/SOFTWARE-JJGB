@@ -55,12 +55,12 @@
     {
       "id": "5",
       "titulo": "Sombras",
-      "autor": "Miguel de Cervantes",
+      "autor": "Josué Rufino",
       "imagem": "/uploads/livros/book5.png",
       "isbn": "978-3-16-148410-0",
       "ano_publicacao": 1605,
       "quantidade_disponivel": 3,
-      "subcategoria_id": 1,
+      "subcategoria_id": 2,
       "status": true,
       "createdAt": "2024-11-01T10:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
@@ -179,6 +179,12 @@
       "categoria_id": 6,
       "updatedAt": "2024-11-24 20:18:12",
       "id": "72b7"
+    },
+    {
+      "id": "6250",
+      "categoria_id": 2,
+      "nome": "sss",
+      "createdAt": "2024-11-25 20:13:06"
     }
   ],
   "estudantes": [

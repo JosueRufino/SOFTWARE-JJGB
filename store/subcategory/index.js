@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 export const useSubcategoryStore = defineStore("subcategory", {
   state: () => ({
     subcategories: [], // Lista de subcategorias
+    subcategoriesByCategories: [],
     currentSubcategory: null, // Subcategoria atual para edição
     isLoading: false, // Controle de carregamento
   }),
@@ -38,6 +39,31 @@ export const useSubcategoryStore = defineStore("subcategory", {
         console.error("Erro ao buscar subcategorias ou categorias:", error);
       } finally {
         this.isLoading = false;
+      }
+    },
+
+    // Função para buscar subcategorias de uma categoria específica
+    getSubcategoriesByCategoryId(categoryId) {
+      try {
+        // Filtra as subcategorias com base no ID fornecido
+        const filteredSubcategories = this.subcategories.filter(
+          (subcat) => String(subcat.categoria_id) === categoryId
+        );
+
+        if (filteredSubcategories.length === 0) {
+          console.warn(
+            `Nenhuma subcategoria encontrada para a categoria ID: ${categoryId}`
+          );
+        }
+
+        // Armazena as subcategorias filtradas no estado
+        this.subcategoriesByCategories = filteredSubcategories;
+
+        // Retorna sucesso com os dados
+        return { success: true, data: filteredSubcategories };
+      } catch (error) {
+        console.error("Erro ao obter subcategorias:", error.message || error);
+        return { success: false, error: error.message || error }; // Retorna o erro de forma estruturada
       }
     },
 
