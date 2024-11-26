@@ -47,9 +47,9 @@
       </div>
       <div class="row w-100 gx-5 justify-content-start">
         <div
-          v-if="filteredBooks.length"
+          v-if="paginatedBooks.length"
           class="col-3 mb-3"
-          v-for="(book, i) in filteredBooks"
+          v-for="(book, i) in paginatedBooks"
           :key="i"
         >
           <div><LivrosCard :book="book" /></div>
@@ -57,7 +57,11 @@
         <div v-else class="col-12 text-center">Nenhum livro encontrado</div>
       </div>
       <div class="d-flex justify-content-center mt-3">
-        <Pagination />
+        <Pagination 
+          v-model="currentPage"
+          :totalItems="filteredBooks.length"
+          :itemsPerPage="itemsPerPage"
+        />
       </div>
     </div>
   </div>
@@ -77,7 +81,8 @@ const searchTerm = ref("");
 
 const books = computed(() => useBook.getAllBooks);
 const categorys = computed(() => useCategory.categories);
-const subcategorys = computed(() => useSubcategory.subcategories);
+const currentPage = ref(1);
+const itemsPerPage = ref(4); // Número de itens por página
 
 // Computed para filtrar livros
 const filteredBooks = computed(() => {
@@ -97,6 +102,14 @@ const filteredBooks = computed(() => {
     );
   });
 });
+
+// Computed para livros paginados
+const paginatedBooks = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return filteredBooks.value.slice(start, end);
+});
+
 const query = computed(() => route.query);
 // Função para aplicar os filtros
 const applyQueryFilters = () => {
