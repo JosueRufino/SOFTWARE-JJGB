@@ -19,6 +19,7 @@ export const useBookStore = defineStore("book", {
 
   actions: {
     // Buscar todos os livros
+    // Busca todos os livros
     async fetchBooks() {
       this.loading = true;
       this.error = null;
@@ -30,7 +31,8 @@ export const useBookStore = defineStore("book", {
 
         if (response) {
           this.books = response;
-          this.filteredBooks = [...response]; // Inicializa com todos os livros
+          this.filteredBooks = [...this.books];
+          console.log("fetch", this.books)
         } else {
           throw new Error("Formato de resposta inválido");
         }

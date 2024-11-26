@@ -5,7 +5,7 @@
     </div>
 
     <!-- Botão de Resetar Filtros -->
-    <button class="btn btn-outline-danger w-100 mt-2" @click="resetFilters">
+    <button class="btn btn-outline-danger w-100 mt-2" @click="resetFilters" v-if="isReset">
       Resetar Filtros
     </button>
 
@@ -81,11 +81,12 @@
 <script setup>
 import { useSubcategoryStore } from "@/store/subcategory/index";
 import { useBookStore } from "@/store/books/index";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const props = defineProps(["categorys"]);
 
 const router = useRouter();
+const route = useRoute();
 
 // Variáveis reativas para filtros
 const idCategory = ref(""); // Categoria selecionada
@@ -98,6 +99,13 @@ const useBook = useBookStore();
 
 const subcategorys = computed(() => useSubcategory.subcategoriesByCategories);
 const authores = computed(() => useBook.getAuthors);
+
+// Verifica se há filtros aplicados na URL
+const query = computed(() => route.query);
+const isReset = computed(() => {
+  // Verifica se existe algum dos parâmetros de filtro na query
+  return !!query.value.status || !!query.value.author || !!query.value.subcategory;
+});
 
 onMounted(async () => {
   await useSubcategory.fetchSubcategoriesAndCategories();
@@ -137,12 +145,13 @@ const handleSubcategoryClick = (subcategoryId) => {
 };
 
 // Função para resetar todos os filtros
-const resetFilters = () => {
+const resetFilters = async () => {
   idCategory.value = "";
   idSub.value = "";
   author.value = "";
   status.value = "";
   router.push({ query: {} });
+  await useBook.fetchBooks();
 };
 
 // Função para resetar todos os filtros, exceto o especificado

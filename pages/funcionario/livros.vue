@@ -87,17 +87,19 @@ const searchBooks = () => {
 const query = computed(() => route.query);
 // Função para aplicar os filtros
 const applyQueryFilters = () => {
-  if (query.value.status) {
-    console.log("statis", query.value.status);
-    useBook.filterByStatus(query.value.status);
-  } else if (query.value.author) {
-    useBook.filterByAuthor(query.value.author);
-    console.log("autor", query.value.author);
-  } else if (query.value.subcategory) {
-    console.log("sub", query.value.subcategory);
-    useBook.filterBySubcategory(query.value.subcategory);
-  } else {
+  if (!query.value.status && !query.value.author && !query.value.subcategory) {
     useBook.fetchBooks();
+  } else {
+    if (query.value.status) {
+      console.log("statis", query.value.status);
+      useBook.filterByStatus(query.value.status);
+    } else if (query.value.author) {
+      useBook.filterByAuthor(query.value.author);
+      console.log("autor", query.value.author);
+    } else if (query.value.subcategory) {
+      console.log("sub", query.value.subcategory);
+      useBook.filterBySubcategory(query.value.subcategory);
+    }
   }
 };
 
