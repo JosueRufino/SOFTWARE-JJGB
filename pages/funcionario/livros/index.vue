@@ -2,6 +2,7 @@
   <div class="row gx-3 vh-100 w-100">
     <LivrosModalCategory :categorys="categorys" />
     <LivrosModalSubcategory />
+    <LivrosModalRegisterBook/>
     <div class="col-3">
       <div class="p-1">
         <LivrosFilter :categorys="categorys" />
@@ -13,7 +14,7 @@
           class="d-flex justify-content-between align-items-center h-100 px-2"
         >
           <div>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRegisterBook">
               <i class="bi bi-plus-circle"></i> Novo livro
             </button>
             <button
@@ -41,7 +42,6 @@
               placeholder="Pesquise um livro"
               v-model="searchTerm"
             />
-            
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
         <div v-else class="col-12 text-center">Nenhum livro encontrado</div>
       </div>
       <div class="d-flex justify-content-center mt-3">
-        <Pagination 
+        <Pagination
           v-model="currentPage"
           :totalItems="filteredBooks.length"
           :itemsPerPage="itemsPerPage"
@@ -92,7 +92,7 @@ const filteredBooks = computed(() => {
   // Converte o termo para minúsculas para busca case-insensitive
   const searchLower = searchTerm.value.toLowerCase();
 
-  // Filtra os livros 
+  // Filtra os livros
   return books.value.filter((book) => {
     // Adicione aqui os campos que deseja buscar
     return (

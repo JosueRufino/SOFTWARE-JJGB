@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 export const useSubcategoryStore = defineStore("subcategory", {
   state: () => ({
     subcategories: [], // Lista de subcategorias
+    subcategory: null,
     subcategoriesByCategories: [],
     currentSubcategory: null, // Subcategoria atual para edição
     isLoading: false, // Controle de carregamento
@@ -39,6 +40,17 @@ export const useSubcategoryStore = defineStore("subcategory", {
         console.error("Erro ao buscar subcategorias ou categorias:", error);
       } finally {
         this.isLoading = false;
+      }
+    },
+
+    async fetchSubcategoryId(id){
+      try{
+        const response = await $fetch(`http://localhost:3001/subcategorias/${id}`)
+        if(response){
+          this.subcategory = response
+        }
+      }catch(erro){
+        console.log(error)
       }
     },
 
