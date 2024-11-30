@@ -60,14 +60,14 @@ const links = [
     path: "/funcionario/funcionarios",
   },
   {
+    name: "Emprestimos/Lista de espera",
+    icon: "bi bi-list-columns-reverse",
+    path: "/funcionario/emprestimo_ListaDeEspera",
+  },
+  {
     name: "Notificações",
     icon: "bi bi-bell",
     path: "/funcionario/notificacoes",
-  },
-  {
-    name: "Ajuda e Suporte",
-    icon: "bi bi-question-circle",
-    path: "/funcionario/ajuda_e_suporte",
   },
 ];
 </script>

@@ -50,10 +50,12 @@
         </p>
         <p class="mb-0"><strong>Subcategoria:</strong> {{ subcategory }}</p>
       </div>
-
-      <!-- Botão de disponibilidade -->
     </div>
-    <div class="card mt-2 border-0 p-2">
+    <div class="card p-2 mt-2 border-0">
+      <p class="fw-bold">Descrição</p>
+      {{ book.descricao }}
+    </div>
+    <div class="card mt-2 border-0 p-2 mb-4">
       <div>
         <!-- Navegação das tabs -->
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -88,7 +90,7 @@
           <li class="nav-item" role="presentation">
             <button
               class="nav-link"
-               id="pills-profile-tab"
+              id="pills-profile-tab"
               data-bs-toggle="pill"
               data-bs-target="#tab3"
               type="button"
@@ -109,8 +111,54 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <h3>Estudantes em espera</h3>
-            <p>Conteúdo relacionado à aba Home.</p>
+            <h5>Estudantes em espera</h5>
+            <div class="mt-2">
+              <table
+                class="table table-striped text-center table-hover"
+                v-if="studantesFilaEspera.length"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Estudante</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Número de estudante</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Notificado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(f, i) in studantesFilaEspera" :key="i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                      <img
+                        :src="f.estudante.imagem"
+                        style="max-height: 40px; border-radius: 50%"
+                      />
+                    </td>
+                    <td>{{ f.estudante.nome }}</td>
+                    <td>{{ f.estudante.matricula }}</td>
+                    <td>{{ f.estudante.email }}</td>
+                    <td>{{ formatDateTime(f.estudante.createdAt) }}</td>
+                    <td>
+                      <div
+                        class="text-center text-white p-1"
+                        :class="f.notificado ? 'bg-success' : 'bg-danger'"
+                        style="border-radius: 20px; font-size: 0.8rem"
+                      >
+                        {{ f.notificado ? "Notificado" : "Não notificado" }}
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div v-else>
+                <p class="text-center mt-4 text-secondary">
+                  Dados não encontrados
+                </p>
+              </div>
+            </div>
           </div>
           <div
             class="tab-pane fade"
@@ -118,8 +166,47 @@
             role="tabpanel"
             aria-labelledby="pills-profile-tab"
           >
-            <h3>Emprestado em</h3>
-            <p>Conteúdo relacionado à aba Profile.</p>
+            <h5>Emprestado em</h5>
+            <table class="table table-striped text-center text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Estudante</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Número</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Data de emprestimo</th>
+                  <th scope="col">Data de devolucao</th>
+                  <th scope="col">Data devolvida</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(e, i) in EmprestimosComEstudantes" :key="i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>
+                    <img
+                      :src="e.estudante.imagem"
+                      style="max-height: 40px; border-radius: 50%"
+                    />
+                  </td>
+                  <td>{{ e.estudante.nome }}</td>
+                  <td>{{ e.estudante.matricula }}</td>
+                  <td>{{ e.estudante.email }}</td>
+                  <td>
+                    <div
+                      class="bg-warning text-white p-1"
+                      style="border-radius: 20px; font-size: 0.8rem"
+                    >
+                      Em andamento
+                    </div>
+                  </td>
+                  <td>{{ formatDateTime(e.data_emprestimo) }}</td>
+                  <td>{{ formatDateTime(e.data_devolucao) }}</td>
+                  <td class="text-secondary">Sem data</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div
             class="tab-pane fade"
@@ -127,7 +214,57 @@
             role="tabpanel"
             aria-labelledby="pills-profile-tab"
           >
-            <h3>tabs</h3>
+            <h5>Histórico</h5>
+            <table class="table table-striped text-center text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Estudante</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Número</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Data de emprestimo</th>
+                  <th scope="col">Data de devolucao</th>
+                  <th scope="col">Data devolvida</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(e, i) in EmprestimosComEstudantes2" :key="i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>
+                    <img
+                      :src="e.estudante.imagem"
+                      style="max-height: 40px; border-radius: 50%"
+                    />
+                  </td>
+                  <td>{{ e.estudante.nome }}</td>
+                  <td>{{ e.estudante.matricula }}</td>
+                  <td>{{ e.estudante.email }}</td>
+                  <td class="text-white">
+                    <div
+                    class="
+                    p-2"
+                      :class="
+                        getDevolucaoStatus(e.data_devolucao, e.data_devolvida)
+                          .classe
+                      "
+                      style="border-radius: 20px; font-size: 0.8rem"
+                    >
+                      {{
+                        getDevolucaoStatus(e.data_devolucao, e.data_devolvida)
+                          .texto
+                      }}
+                    </div>
+                  </td>
+                  <td>{{ formatDateTime(e.data_emprestimo) }}</td>
+                  <td>{{ formatDateTime(e.data_devolucao) }}</td>
+                  <td :class="!e.data_devolvida ? 'text-secondary' : ''">
+                    {{ formatDateTime(e.data_devolvida) || "Sem data" }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -139,16 +276,67 @@
 <script setup>
 import { useBookStore } from "@/store/books/index";
 import { useSubcategoryStore } from "@/store/subcategory/index";
+import { useFilaEsperaStore } from "@/store/filaEspera/index";
+import { useEmprestimosStore } from "@/store/emprestimo/index";
 
 const useBook = useBookStore();
 const useSubcategory = useSubcategoryStore();
+const useFilaEspera = useFilaEsperaStore();
+const useEmprestimos = useEmprestimosStore();
 const route = useRoute();
 
+// Função para formatar a data
+const formatDateTime = (dateString) => {
+  const date = new Date(dateString);
+
+  // Extrair partes da data
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Mês ajustado (0-11)
+  const year = date.getFullYear();
+
+  // Extrair partes do horário
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+};
+
+// Função para verificar se foi devolvido no prazo
+function foiDevolvidoATempo(dataPrevista, dataDevolvida) {
+  const dataPrevistaObj = new Date(dataPrevista);
+  const dataDevolvidaObj = new Date(dataDevolvida);
+
+  // Verificar validade das datas
+  if (isNaN(dataPrevistaObj.getTime()) || isNaN(dataDevolvidaObj.getTime())) {
+    return false; // Retorna false se alguma data for inválida
+  }
+
+  // Retorna true se devolvido no prazo
+  return dataDevolvidaObj <= dataPrevistaObj;
+}
+
+const getDevolucaoStatus = (dataPrevista, dataDevolvida) => {
+  const noPrazo = foiDevolvidoATempo(dataPrevista, dataDevolvida);
+  return {
+    texto: noPrazo ? "Devolvido a tempo" : "Atrasado",
+    classe: noPrazo ? "bg-success" : "bg-danger",
+  };
+};
+
 const book = computed(() => useBook.getBookId);
-const subcategory = computed(() => useSubcategory.subcategory.nome);
+const subcategory = computed(() => useSubcategory?.subcategory?.nome);
+const studantesFilaEspera = computed(() => useFilaEspera.filaAtual);
+const EmprestimosComEstudantes = computed(
+  () => useEmprestimos.emprestimosComEstudantes
+);
+const EmprestimosComEstudantes2 = computed(() => useEmprestimos.emprestimos2);
 onMounted(async () => {
   await useBook.fetchBookById(route.params.id);
   await useSubcategory.fetchSubcategoryId(book.value.subcategoria_id);
+  await useFilaEspera.fetchFilaPorLivro(route.params.id);
+  await useEmprestimos.fetchEmprestimosPorLivro(route.params.id);
+  await useEmprestimos.fetchEmprestimosPorLivroOthers(route.params.id);
 });
 
 definePageMeta({

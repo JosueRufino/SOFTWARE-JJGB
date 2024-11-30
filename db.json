@@ -3,6 +3,7 @@
     {
       "id": "1",
       "titulo": "Brilho",
+      "descricao": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with",
       "autor": "Miguel de Cervantes",
       "imagem": "/uploads/livros/book1.png",
       "isbn": "978-3-16-148410-0",
@@ -17,6 +18,7 @@
     {
       "id": "2",
       "titulo": "Mestres do tempo",
+      "descricao": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with",
       "autor": "Miguel de Cervantes",
       "imagem": "/uploads/livros/book2.png",
       "isbn": "978-3-16-148410-0",
@@ -31,6 +33,7 @@
     {
       "id": "3",
       "titulo": "Vida fora da gangue",
+      "descricao": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with",
       "autor": "Miguel de Cervantes",
       "imagem": "/uploads/livros/book3.png",
       "isbn": "978-3-16-148410-0",
@@ -45,6 +48,7 @@
     {
       "id": "4",
       "titulo": "Bazar dos poetas",
+      "descricao": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with",
       "autor": "Miguel de Cervantes",
       "imagem": "/uploads/livros/book4.png",
       "isbn": "978-3-16-148410-0",
@@ -59,6 +63,7 @@
     {
       "id": "5",
       "titulo": "Sombras",
+      "descricao": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with",
       "autor": "Josué Rufino",
       "imagem": "/uploads/livros/book5.png",
       "isbn": "978-3-16-148410-0",
@@ -195,9 +200,19 @@
   "estudantes": [
     {
       "id": "1",
+      "imagem": "/uploads/estudantes/user.png",
       "nome": "João Silva",
       "matricula": "20230001",
       "email": "joao.silva@exemplo.com",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "imagem": "/uploads/estudantes/user.png",
+      "nome": "Josué Rufino",
+      "matricula": "20220099",
+      "email": "josue.rufino@exemplo.com",
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     }
@@ -217,12 +232,19 @@
       "id": "1",
       "livro_id": 1,
       "estudante_id": 1,
-      "data_emprestimo": "2024-11-01",
-      "data_devolucao": "2024-11-15",
+      "data_emprestimo": "2024-11-01T09:00:00Z",
+      "data_devolucao": "2024-11-05T09:00:00Z",
       "data_devolvida": null,
-      "status": "em andamento",
-      "createdAt": "2024-11-01T09:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "status": 0
+    },
+    {
+      "id": "2",
+      "livro_id": 1,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-11-01T09:00:00Z",
+      "data_devolucao": "2024-11-05T09:00:00Z",
+      "data_devolvida": "2024-11-06T09:00:00Z",
+      "status": 1
     }
   ],
   "filaEspera": [
@@ -231,6 +253,15 @@
       "livro_id": 1,
       "estudante_id": 1,
       "posicao": 1,
+      "notificado": false,
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "livro_id": 1,
+      "estudante_id": 2,
+      "posicao": 2,
       "notificado": false,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
