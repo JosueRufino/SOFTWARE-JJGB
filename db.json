@@ -9,11 +9,11 @@
       "isbn": "978-3-16-148410-0",
       "ano_publicacao": 1605,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
+      "quantidade_disponivel": 0,
       "subcategoria_id": 1,
-      "status": true,
+      "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "updatedAt": "2024-12-01T17:22:13.211Z"
     },
     {
       "id": "2",
@@ -229,42 +229,51 @@
   ],
   "emprestimos": [
     {
-      "id": "1",
+      "id": "9710",
       "livro_id": 1,
-      "estudante_id": 1,
-      "data_emprestimo": "2024-11-01T09:00:00Z",
-      "data_devolucao": "2024-11-05T09:00:00Z",
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-01",
+      "data_devolucao": "2024-12-04",
       "data_devolvida": null,
       "status": 0
     },
     {
-      "id": "2",
+      "id": "e712",
       "livro_id": 1,
-      "estudante_id": 2,
-      "data_emprestimo": "2024-11-01T09:00:00Z",
-      "data_devolucao": "2024-11-05T09:00:00Z",
-      "data_devolvida": "2024-11-06T09:00:00Z",
-      "status": 1
+      "estudante_id": 1,
+      "data_emprestimo": "2024-12-01",
+      "data_devolucao": "2024-12-04",
+      "data_devolvida": null,
+      "status": 0
     }
   ],
   "filaEspera": [
     {
-      "id": "1",
+      "id": "8ca4",
       "livro_id": 1,
-      "estudante_id": 1,
+      "estudante_id": 2,
       "posicao": 1,
       "notificado": false,
-      "createdAt": "2024-11-01T09:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "createdAt": "2024-12-01T17:57:20.618Z",
+      "updatedAt": "2024-12-01T17:57:20.618Z"
     },
     {
-      "id": "2",
+      "id": "50ac",
+      "livro_id": 2,
+      "estudante_id": 2,
+      "posicao": 1,
+      "notificado": false,
+      "createdAt": "2024-12-01T17:57:59.958Z",
+      "updatedAt": "2024-12-01T17:57:59.958Z"
+    },
+    {
+      "id": "02cc",
       "livro_id": 1,
       "estudante_id": 2,
       "posicao": 2,
       "notificado": false,
-      "createdAt": "2024-11-01T09:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "createdAt": "2024-12-01T18:07:36.679Z",
+      "updatedAt": "2024-12-01T18:07:36.679Z"
     }
   ],
   "alertas": [

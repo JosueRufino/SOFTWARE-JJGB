@@ -1,34 +1,25 @@
 <template>
   <div class="p-3" v-if="book">
-    <NuxtLink
-      to="/funcionario/livros"
-      style="text-decoration: none; color: black"
-    >
+    <NuxtLink to="/funcionario/livros" style="text-decoration: none; color: black">
       <div class="d-flex align-items-center">
         <i class="bi bi-arrow-left-circle fs-2 me-2"></i>
         Voltar
       </div>
     </NuxtLink>
-    <div
-      class="card livro-card border-0 p-3 d-flex flex-row gap-3 align-items-start"
-    >
+    <div class="card livro-card border-0 p-3 d-flex flex-row gap-3 align-items-start">
       <!-- Imagem do livro -->
       <div class="livro-image-container">
-        <img :src="book.imagem" alt="Capa do livro" class="livro-image" />
+        <img :src="book?.imagem" alt="Capa do livro" class="livro-image" />
       </div>
 
       <!-- Informações do livro -->
       <div class="livro-info flex-grow-1">
         <div class="d-flex">
           <h5 class="fw-bold fs-3 me-3">{{ book.titulo }}</h5>
-          <button
-            class="btn"
-            :class="
-              book.quantidade_disponivel > 0 && book.status
-                ? 'btn-success'
-                : 'btn-danger'
-            "
-          >
+          <button class="btn" :class="book.quantidade_disponivel > 0 && book.status
+              ? 'btn-success'
+              : 'btn-danger'
+            ">
             {{
               book.quantidade_disponivel > 0 && book.status
                 ? "Disponível"
@@ -60,44 +51,20 @@
         <!-- Navegação das tabs -->
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="pills-home-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#tab1"
-              type="button"
-              role="tab"
-              aria-controls="pills-home"
-              aria-selected="true"
-            >
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#tab1"
+              type="button" role="tab" aria-controls="pills-home" aria-selected="true">
               Estudantes em espera
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="pills-profile-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#tab2"
-              type="button"
-              role="tab"
-              aria-controls="pills-profile"
-              aria-selected="false"
-            >
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#tab2" type="button"
+              role="tab" aria-controls="pills-profile" aria-selected="false">
               Emprestado em
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="pills-profile-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#tab3"
-              type="button"
-              role="tab"
-              aria-controls="pills-profile"
-              aria-selected="false"
-            >
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#tab3" type="button"
+              role="tab" aria-controls="pills-profile" aria-selected="false">
               Histórico de emprestimos
             </button>
           </li>
@@ -105,18 +72,10 @@
 
         <!-- Conteúdo dos paineis -->
         <div class="tab-content" id="pills-tabContent">
-          <div
-            class="tab-pane fade show active"
-            id="tab1"
-            role="tabpanel"
-            aria-labelledby="pills-home-tab"
-          >
+          <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="pills-home-tab">
             <h5>Estudantes em espera</h5>
             <div class="mt-2">
-              <table
-                class="table table-striped text-center table-hover"
-                v-if="studantesFilaEspera.length"
-              >
+              <table class="table table-striped text-center table-hover" v-if="studantesFilaEspera.length">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -132,21 +91,15 @@
                   <tr v-for="(f, i) in studantesFilaEspera" :key="i">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>
-                      <img
-                        :src="f.estudante.imagem"
-                        style="max-height: 40px; border-radius: 50%"
-                      />
+                      <img :src="f.estudante.imagem" style="max-height: 40px; border-radius: 50%" />
                     </td>
                     <td>{{ f.estudante.nome }}</td>
                     <td>{{ f.estudante.matricula }}</td>
                     <td>{{ f.estudante.email }}</td>
                     <td>{{ formatDateTime(f.estudante.createdAt) }}</td>
                     <td>
-                      <div
-                        class="text-center text-white p-1"
-                        :class="f.notificado ? 'bg-success' : 'bg-danger'"
-                        style="border-radius: 20px; font-size: 0.8rem"
-                      >
+                      <div class="text-center text-white p-1" :class="f.notificado ? 'bg-success' : 'bg-danger'"
+                        style="border-radius: 20px; font-size: 0.8rem">
                         {{ f.notificado ? "Notificado" : "Não notificado" }}
                       </div>
                     </td>
@@ -160,12 +113,7 @@
               </div>
             </div>
           </div>
-          <div
-            class="tab-pane fade"
-            id="tab2"
-            role="tabpanel"
-            aria-labelledby="pills-profile-tab"
-          >
+          <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="pills-profile-tab">
             <h5>Emprestado em</h5>
             <table class="table table-striped text-center text-center">
               <thead>
@@ -185,19 +133,13 @@
                 <tr v-for="(e, i) in EmprestimosComEstudantes" :key="i">
                   <th scope="row">{{ i + 1 }}</th>
                   <td>
-                    <img
-                      :src="e.estudante.imagem"
-                      style="max-height: 40px; border-radius: 50%"
-                    />
+                    <img :src="e.estudante.imagem" style="max-height: 40px; border-radius: 50%" />
                   </td>
                   <td>{{ e.estudante.nome }}</td>
                   <td>{{ e.estudante.matricula }}</td>
                   <td>{{ e.estudante.email }}</td>
                   <td>
-                    <div
-                      class="bg-warning text-white p-1"
-                      style="border-radius: 20px; font-size: 0.8rem"
-                    >
+                    <div class="bg-warning text-white p-1" style="border-radius: 20px; font-size: 0.8rem">
                       Em andamento
                     </div>
                   </td>
@@ -208,12 +150,7 @@
               </tbody>
             </table>
           </div>
-          <div
-            class="tab-pane fade"
-            id="tab3"
-            role="tabpanel"
-            aria-labelledby="pills-profile-tab"
-          >
+          <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="pills-profile-tab">
             <h5>Histórico</h5>
             <table class="table table-striped text-center text-center">
               <thead>
@@ -233,24 +170,16 @@
                 <tr v-for="(e, i) in EmprestimosComEstudantes2" :key="i">
                   <th scope="row">{{ i + 1 }}</th>
                   <td>
-                    <img
-                      :src="e.estudante.imagem"
-                      style="max-height: 40px; border-radius: 50%"
-                    />
+                    <img :src="e.estudante.imagem" style="max-height: 40px; border-radius: 50%" />
                   </td>
                   <td>{{ e.estudante.nome }}</td>
                   <td>{{ e.estudante.matricula }}</td>
                   <td>{{ e.estudante.email }}</td>
                   <td class="text-white">
-                    <div
-                    class="
-                    p-2"
-                      :class="
-                        getDevolucaoStatus(e.data_devolucao, e.data_devolvida)
-                          .classe
-                      "
-                      style="border-radius: 20px; font-size: 0.8rem"
-                    >
+                    <div class="
+                    p-2" :class="getDevolucaoStatus(e.data_devolucao, e.data_devolvida)
+                        .classe
+                      " style="border-radius: 20px; font-size: 0.8rem">
                       {{
                         getDevolucaoStatus(e.data_devolucao, e.data_devolvida)
                           .texto

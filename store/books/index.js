@@ -182,6 +182,42 @@ export const useBookStore = defineStore("book", {
       }
     },
 
+      // Função para atualizar os dados do livro
+  async updateBook(bookId, updatedData) {
+    this.loading = true;
+    this.error = null;
+
+    try {
+      // Enviar requisição PUT para atualizar o livro
+      const response = await $fetch(`http://localhost:3001/livros/${bookId}`, {
+        method: "PUT",
+        body: JSON.stringify(updatedData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Verifica se a resposta foi bem-sucedida
+      if (response) {
+        // Atualizar o estado local com os novos dados do livro
+        const index = this.books.findIndex((book) => book.id === bookId);
+        if (index !== -1) {
+          this.books[index] = response;
+          this.filteredBooks[index] = response;
+        }
+
+        console.log("Livro atualizado com sucesso:", response);
+        return response;
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar o livro:", error);
+      this.error = error.message || "Erro ao atualizar o livro";
+      throw error;
+    } finally {
+      this.loading = false;
+    }
+  },
+
     // Deletar um livro
     async deleteBook(bookId) {
       this.loading = true;

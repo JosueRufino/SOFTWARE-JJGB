@@ -8,7 +8,7 @@
     <div class="col">
       <div class="card border-0 mb-2" style="height: 50px">
         <div
-          class="d-flex justify-content-between align-items-center h-100 px-2"
+          class="d-flex justify-content-end align-items-center h-100 px-2"
         >
           <div>
             <input
