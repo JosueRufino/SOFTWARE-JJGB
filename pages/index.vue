@@ -1,52 +1,78 @@
 <template>
-  <div class="containe">
+  <div class="contain">
+    <!-- Tela principal -->
     <div class="content-img">
       <div class="overlay"></div>
-      <div class="content d-flex justify-content-center">
-        <div class="me-4">
+      <div class="content d-flex justify-content-center align-items-center">
+        <!-- Texto de boas-vindas -->
+        <div class="welcome-text me-4">
           <h1>BIBLIOTECA JJGB</h1>
           <p>Bem-vindo ao sistema</p>
         </div>
-        <div class="card p-3" style="width: 400px; height: 70vh">
-          <div class="d-flex justify-content-between">
+
+        <!-- Card de login -->
+        <div class="card p-3" style="width: 400px; height: 60vh">
+          <div class="d-flex justify-content-between align-items-center">
             <div>
               <h3>Login</h3>
               <p>Identifique-se para prosseguir</p>
             </div>
             <div>
-              <img src="../public/assets/image2.png" alt="" />
+              <img src="../public/assets/image2.png" alt="Login" />
             </div>
           </div>
+
+          <!-- Formulário -->
           <form @submit.prevent="handleLogin">
+            <!-- Campo de e-mail -->
             <div>
-              <span>Insira o seu email</span>
+              <label for="email">Insira o seu e-mail</label>
               <input
                 v-model="email"
+                id="email"
                 type="email"
                 class="form-control"
                 placeholder="Email"
                 required
               />
             </div>
-            <div>
-              <span>Insira a sua senha</span>
+
+            <!-- Campo de senha -->
+            <div class="mt-3">
+              <label for="password">Insira a sua senha</label>
               <input
                 v-model="password"
+                id="password"
                 type="password"
                 class="form-control"
                 placeholder="Senha"
                 required
               />
             </div>
-            <div>
-              <span>Esqueceu a sua senha?</span>
+
+            <!-- Link de recuperação de senha -->
+            <div class="mt-3 d-flex justify-content-end">
+              <a href="#" class="forgot-password">Esqueceu a sua senha?</a>
             </div>
-            <div v-if="errorMessage" class="text-danger">
+
+            <!-- Mensagem de erro -->
+            <div v-if="errorMessage" class="text-danger mt-2">
               <span>{{ errorMessage }}</span>
             </div>
-            <div>
-              <button type="submit" class="btn btn-primary w-100">
-                Entrar
+
+            <!-- Botão de login -->
+            <div class="mt-3">
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                style="height: 50px"
+                :disabled="loading"
+              >
+                <i
+                  class="bi bi-box-arrow-in-right"
+                  :class="{ 'spinner-border spinner-border-sm': loading }"
+                ></i>
+                {{ loading ? "Entrando..." : "Entrar" }}
               </button>
             </div>
           </form>
@@ -56,25 +82,75 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from "~/store/auth/auth"; // Importa a store de autenticação
 import { useRouter } from "vue-router"; // Para navegação
+import Swal from "sweetalert2"; // Importa SweetAlert2
 
+// Variáveis reativas
 const email = ref("");
 const password = ref("");
 const errorMessage = ref("");
+const loading = ref(false); // Controle de estado de loading
 
+// Store de autenticação e roteador
 const authStore = useAuthStore();
 const router = useRouter();
 
+// Função de login
 const handleLogin = async () => {
+  errorMessage.value = ""; // Limpa a mensagem de erro
+  loading.value = true; // Ativa o estado de loading
+
   try {
+    // Mostra um alerta de carregamento
+    Swal.fire({
+      title: "Carregando...",
+      text: "Por favor, aguarde",
+      didOpen: () => Swal.showLoading(),
+      allowOutsideClick: false,
+    });
+
     // Tenta realizar o login com o email e senha
-    await authStore.login(email.value, password.value);
-    router.push("/funcionario"); // Redireciona para a página principal
+    const result = await authStore.login(email.value, password.value);
+
+    // Verifica o resultado do login
+    if (result.success) {
+      // Mensagem de sucesso com timer
+      Swal.fire({
+        icon: "success",
+        title: "Login realizado!",
+        text: result.message,
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      // Redireciona para a página principal
+      setTimeout(() => router.push("/funcionario"), 1500);
+    } else {
+      // Mensagem de erro com SweetAlert2
+      Swal.fire({
+        icon: "error",
+        title: "Erro no login",
+        text: result.message,
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
   } catch (error) {
-    errorMessage.value = "Credenciais inválidas. Tente novamente."; // Exibe erro
+    // Trata erros inesperados
+    console.error("Erro inesperado ao fazer login:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Erro no servidor",
+      text: "Erro ao conectar ao servidor. Tente novamente.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  } finally {
+    loading.value = false; // Desativa o estado de loading
   }
 };
 </script>
@@ -92,7 +168,7 @@ const handleLogin = async () => {
 }
 
 .content-img {
-  height: 300px;
+  height: 400px;
   width: 100%;
   position: relative;
   background-image: url("../assets/image.jpeg");
@@ -112,7 +188,7 @@ const handleLogin = async () => {
 .content {
   position: relative;
   z-index: 1;
-  padding: 2rem;
+  padding: 6rem;
   color: white;
 }
 
@@ -124,4 +200,14 @@ h1 {
 p {
   font-size: 1.1rem;
 }
+
+input {
+  height: 50px;
+}
+
+.spinner-border {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 </style>

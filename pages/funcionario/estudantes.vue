@@ -11,7 +11,7 @@
         placeholder="Filtrar por mátricula"
       />
     </div>
-    <div class="row">
+    <div class="row w-100">
       <div class="col-3" v-for="(studant, i) in studants" :key="i">
         <div class="p-3"><StudantsCard :studant="studant" /></div>
       </div>
