@@ -1,19 +1,5 @@
 <template>
   <div class="card text-center border-0" style="width: 15rem">
-    <div class="d-flex justify-content-end p-2">
-      <NuxtLink :to="`/funcionario/estudante/${studant.id}`">
-        <button class="btn btn-primary btn-sm me-1">
-          <i class="bi bi-eye"></i>
-        </button>
-      </NuxtLink>
-      <button class="btn btn-secondary btn-sm me-1">
-        <i class="bi bi-pencil"></i>
-      </button>
-      <button class="btn btn-danger btn-sm">
-        <i class="bi bi-trash"></i>
-      </button>
-    </div>
-    <!-- Avatar -->
     <img
       :src="studant?.imagem"
       class="rounded-circle mx-auto mt-2"
@@ -22,10 +8,10 @@
     />
     <!-- Conteúdo do Card -->
     <div class="card-body">
-      <h5 class="card-title">{{ studant.nome }}</h5>
-      <p class="card-text mb-0">{{ studant.matricula }}</p>
+      <h5 class="card-title">{{ studant?.nome }}</h5>
+      <p class="card-text mb-0">{{ studant?.matricula }}</p>
       <p class="text-decoration-none">
-        {{ studant.email }}
+        {{ studant?.email }}
       </p>
     </div>
   </div>

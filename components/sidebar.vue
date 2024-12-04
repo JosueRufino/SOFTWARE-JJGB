@@ -52,7 +52,7 @@ const links = [
   {
     name: "Estudantes",
     icon: "bi bi-people",
-    path: "/funcionario/estudantes",
+    path: "/funcionario/estudante",
   },
   {
     name: "Funcionários",

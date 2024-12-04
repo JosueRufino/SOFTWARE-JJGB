@@ -327,9 +327,9 @@
     {
       "id": "1",
       "imagem": "/uploads/estudantes/user.png",
-      "nome": "João Silva",
+      "nome": "Genilson Daniel",
       "matricula": "20230001",
-      "email": "joao.silva@exemplo.com",
+      "email": "yoga.daniel@exemplo.com",
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     },
@@ -341,7 +341,25 @@
       "email": "josue.rufino@exemplo.com",
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "imagem": "/uploads/estudantes/user.png",
+      "nome": "Benicio Hossi",
+      "matricula": "20221668",
+      "email": "balumuca.hossi@exemplo.com",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },{
+      "id": "4",
+      "imagem": "/uploads/estudantes/user.png",
+      "nome": "Jandira Pena",
+      "matricula": "20220000",
+      "email": "testa.pena@exemplo.com",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
     }
+
   ],
   "funcionarios": [
     {
