@@ -82,7 +82,7 @@ const searchTerm = ref("");
 const books = computed(() => useBook.getAllBooks);
 const categorys = computed(() => useCategory.categories);
 const currentPage = ref(1);
-const itemsPerPage = ref(4); // Número de itens por página
+const itemsPerPage = ref(8); // Número de itens por página
 
 // Computed para filtrar livros
 const filteredBooks = computed(() => {

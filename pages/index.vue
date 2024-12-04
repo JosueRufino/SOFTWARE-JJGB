@@ -11,11 +11,11 @@
         </div>
 
         <!-- Card de login -->
-        <div class="card p-3" style="width: 400px; height: 60vh">
+        <div class="card p-3" style="width: 400px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <h3>Login</h3>
-              <p>Identifique-se para prosseguir</p>
+              <p class="text-secondary mt-1" style="font-size: 1rem;">Identifique-se para prosseguir</p>
             </div>
             <div>
               <img src="../public/assets/image2.png" alt="Login" />
@@ -188,7 +188,7 @@ const handleLogin = async () => {
 .content {
   position: relative;
   z-index: 1;
-  padding: 6rem;
+  padding: 8rem;
   color: white;
 }
 
