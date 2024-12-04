@@ -224,6 +224,18 @@
       "status": true,
       "createdAt": "2024-11-12T20:15:00Z",
       "updatedAt": "2024-11-22T16:10:00Z"
+    },
+    {
+      "id": "ca2a",
+      "titulo": "dssds",
+      "autor": "dsds",
+      "isbn": "sdsd",
+      "ano_publicacao": 1,
+      "quantidade_disponivel": 1,
+      "subcategoria_id": 1,
+      "status": true,
+      "createdAt": "2024-12-04T11:22:41.840Z",
+      "updatedAt": "2024-12-04T11:22:41.840Z"
     }
   ],
   "categories": [
@@ -321,6 +333,12 @@
       "categoria_id": 1,
       "nome": "nova",
       "createdAt": "2024-11-24 20:04:44"
+    },
+    {
+      "id": "75d4",
+      "categoria_id": 8,
+      "nome": "Foco",
+      "createdAt": "2024-12-04 10:57:37"
     }
   ],
   "estudantes": [
@@ -350,7 +368,8 @@
       "email": "balumuca.hossi@exemplo.com",
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
-    },{
+    },
+    {
       "id": "4",
       "imagem": "/uploads/estudantes/user.png",
       "nome": "Jandira Pena",
@@ -359,7 +378,6 @@
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     }
-
   ],
   "funcionarios": [
     {

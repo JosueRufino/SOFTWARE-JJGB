@@ -166,6 +166,7 @@
 
 <script setup>
 import { reactive } from "vue";
+import { useBookStore } from "@/store/books/index"; // Importar o store, se estiver usando Pinia, por exemplo
 
 const form = reactive({
   titulo: "",
@@ -178,24 +179,28 @@ const form = reactive({
   status: "true",
 });
 
+// Exemplo de subcategorias (geralmente vindo de uma API ou store)
 const subcategorias = [
   { id: 1, nome: "Ficção" },
   { id: 2, nome: "História" },
   { id: 3, nome: "Ciência" },
 ];
 
+// Função para lidar com o upload da imagem
 const handleImageUpload = (event) => {
   form.imagem = event.target.files[0]; // Armazena o arquivo selecionado
 };
 
-// No componente de formulário
+// Chama o store para adicionar o livro
 const handleSubmit = async () => {
   try {
-    // Chama a função de adicionar livro no store
-    await bookStore.addBook();
+    // Atribuir o form atual ao livro a ser adicionado no store
+    await useBookStore().addBook(form); // Passa os dados do form para o store
 
     // Fecha o modal após o cadastro
-    $("#modalCadastroLivro").modal("hide");
+    const modal = document.getElementById("staticBackdropRegisterBook");
+    const modalInstance = bootstrap.Modal.getInstance(modal); // Acessa a instância do modal
+    modalInstance.hide(); // Fecha o modal
   } catch (erro) {
     // Mostra mensagem de erro ao usuário
     alert("Erro ao cadastrar livro");

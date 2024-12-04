@@ -57,7 +57,6 @@ export const useBookStore = defineStore("book", {
         console.error("Erro ao buscar o livro por ID:", error);
       }
     },
-    
 
     // Filtrar por autor
     filterByAuthor(authorName) {
@@ -182,41 +181,44 @@ export const useBookStore = defineStore("book", {
       }
     },
 
-      // Função para atualizar os dados do livro
-  async updateBook(bookId, updatedData) {
-    this.loading = true;
-    this.error = null;
+    // Função para atualizar os dados do livro
+    async updateBook(bookId, updatedData) {
+      this.loading = true;
+      this.error = null;
 
-    try {
-      // Enviar requisição PUT para atualizar o livro
-      const response = await $fetch(`http://localhost:3001/livros/${bookId}`, {
-        method: "PUT",
-        body: JSON.stringify(updatedData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        // Enviar requisição PUT para atualizar o livro
+        const response = await $fetch(
+          `http://localhost:3001/livros/${bookId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(updatedData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      // Verifica se a resposta foi bem-sucedida
-      if (response) {
-        // Atualizar o estado local com os novos dados do livro
-        const index = this.books.findIndex((book) => book.id === bookId);
-        if (index !== -1) {
-          this.books[index] = response;
-          this.filteredBooks[index] = response;
+        // Verifica se a resposta foi bem-sucedida
+        if (response) {
+          // Atualizar o estado local com os novos dados do livro
+          const index = this.books.findIndex((book) => book.id === bookId);
+          if (index !== -1) {
+            this.books[index] = response;
+            this.filteredBooks[index] = response;
+          }
+
+          console.log("Livro atualizado com sucesso:", response);
+          return response;
         }
-
-        console.log("Livro atualizado com sucesso:", response);
-        return response;
+      } catch (error) {
+        console.error("Erro ao atualizar o livro:", error);
+        this.error = error.message || "Erro ao atualizar o livro";
+        throw error;
+      } finally {
+        this.loading = false;
       }
-    } catch (error) {
-      console.error("Erro ao atualizar o livro:", error);
-      this.error = error.message || "Erro ao atualizar o livro";
-      throw error;
-    } finally {
-      this.loading = false;
-    }
-  },
+    },
 
     // Deletar um livro
     async deleteBook(bookId) {
@@ -245,52 +247,55 @@ export const useBookStore = defineStore("book", {
       }
     },
 
-    // Método para adicionar um novo livro
-    async addBook() {
+    async addBook(form) {
       this.loading = true;
       this.error = null;
+      console.log(form)
 
       try {
         // Criar FormData para upload
         const formData = new FormData();
 
-        // Preparar dados do livro
-        const bookData = {
-          titulo: "josue",
-          autor: "josue",
-          isbn: "josue",
-          ano_publicacao: 2002,
-          quantidade_disponivel: 5,
-          subcategoria_id: 1,
-          status: true, // Converte para booleano
-        };
+        // Obter a data atual para os campos createdAt e updatedAt
+        const currentDate = new Date().toISOString(); // Formato ISO 8601: "YYYY-MM-DDTHH:mm:ss.sssZ"
 
         // Adicionar dados do livro ao FormData
+        const bookData = {
+          titulo: form.titulo,
+          descricao: form.descricao, // Descrição do livro
+          autor: form.autor,
+          isbn: form.isbn,
+          ano_publicacao: form.ano_publicacao,
+          quantidade_total: form.quantidade_total,
+          quantidade_disponivel: form.quantidade_disponivel,
+          subcategoria_id: form.subcategoria_id,
+          status: form.status === "true", // Converte para booleano
+          createdAt: currentDate, // Atribui a data de criação
+          updatedAt: currentDate, // Atribui a mesma data para atualização
+        };
+
+        console.log("bookDta", bookData)
+
         formData.append("book", JSON.stringify(bookData));
 
         // Adicionar imagem se existir
-        if (this.form.imagem) {
-          formData.append("imagem", this.form.imagem);
+        if (form.imagem) {
+          formData.append("imagem", form.imagem);
         }
-
+        console.log("formData", formData)
         // Enviar requisição POST para criar livro
         const response = await $fetch("http://localhost:3001/livros", {
           method: "POST",
-          body: formData,
+          body: bookData,
           headers: {
             Accept: "application/json",
           },
         });
-
+        console.log("respnse", response)
         // Adicionar o novo livro ao estado local
         if (response) {
           this.books.push(response);
-          this.filteredBooks.push(response);
-
           console.log("Livro cadastrado com sucesso:", response);
-
-          // Resetar formulário após cadastro bem-sucedido
-          this.resetBookForm();
         }
 
         return response;
