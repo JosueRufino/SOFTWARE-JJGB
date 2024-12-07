@@ -86,6 +86,14 @@
                       class="form-control"
                       disabled
                     />
+                    <span class="input-group-text bg-transparent border-0">
+                      <span
+                        v-if="loadingEstudante"
+                        class="spinner-border spinner-border-sm text-primary"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </span>
                   </div>
                 </div>
               </fieldset>
@@ -167,7 +175,7 @@ const useEstudante = useStudentStore();
 const useEmprestimos = useEmprestimosStore();
 const route = useRoute();
 const estudanteId = ref("");
-
+const loadingEstudante = ref(false)
 const dataBook = computed(() => useBook.getBookId);
 
 const form = ref({
@@ -219,14 +227,12 @@ function resetForm() {
     dataDevolucao: getReturnDate(),
   };
 }
-
 // Função de busca de estudante
 async function buscarEstudantePorMatricula() {
   const matricula = form.value.numeroMatricula;
 
   if (!matricula) {
     form.value.nomeEstudante = "";
-    useEstudante.clearFilters();
     Swal.fire({
       icon: "warning",
       title: "Atenção",
@@ -235,18 +241,20 @@ async function buscarEstudantePorMatricula() {
     return;
   }
 
+  loadingEstudante.value = true; // Ativando o spinner
+
   try {
     const estudantes = await useEstudante.filterByMatricula(matricula);
-    console.log("Estudantes encontrados:", estudantes);
+    console.log("eeee", estudantes)
     if (estudantes && estudantes.length > 0) {
       form.value.nomeEstudante = estudantes[0].nome;
       estudanteId.value = estudantes[0].id;
     } else {
       form.value.nomeEstudante = "";
       Swal.fire({
-        icon: "error",
+        icon: "warning",
         title: "Estudante não encontrado",
-        text: "Verifique o número de matrícula e tente novamente.",
+        text: "Nenhum estudante foi encontrado com esta matrícula.",
       });
     }
   } catch (error) {
@@ -255,8 +263,10 @@ async function buscarEstudantePorMatricula() {
     Swal.fire({
       icon: "error",
       title: "Erro",
-      text: "Erro ao buscar o estudante. Tente novamente.",
+      text: "Erro ao buscar o estudante. Por favor, tente novamente.",
     });
+  } finally {
+    loadingEstudante.value = false; // Desativando o spinner
   }
 }
 

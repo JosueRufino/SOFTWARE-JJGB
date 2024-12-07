@@ -84,7 +84,7 @@ export const useStudentStore = defineStore("student", {
     
           // Retorna os estudantes filtrados sem sobrescrever a função
           return studants.filter((student) =>
-            student.matricula.includes(matricula)
+            student.matricula === matricula
           );
         }
       } catch (error) {
