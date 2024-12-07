@@ -9,7 +9,7 @@
     <div class="card livro-card border-0 p-3 d-flex flex-row gap-3 align-items-start">
       <!-- Imagem do livro -->
       <div class="livro-image-container">
-        <img :src="book?.imagem" alt="Capa do livro" class="livro-image" />
+        <img v-if="book && book.imagem" :src="book?.imagem" alt="Capa do livro" class="livro-image" />
       </div>
 
       <!-- Informações do livro -->

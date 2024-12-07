@@ -39,11 +39,11 @@
       "isbn": "978-3-16-148410-2",
       "ano_publicacao": 1610,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
-      "subcategoria_id": "1",
-      "status": true,
+      "quantidade_disponivel": 0,
+      "subcategoria_id": 1,
+      "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "updatedAt": "2024-12-07T19:53:27.419Z"
     },
     {
       "id": "4",
@@ -54,11 +54,11 @@
       "isbn": "978-3-16-148410-3",
       "ano_publicacao": 1620,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
-      "subcategoria_id": "1",
-      "status": true,
+      "quantidade_disponivel": 0,
+      "subcategoria_id": 1,
+      "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "updatedAt": "2024-12-07T19:57:52.088Z"
     },
     {
       "id": "5",
@@ -69,11 +69,11 @@
       "isbn": "978-3-16-148410-4",
       "ano_publicacao": 1625,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
-      "subcategoria_id": "2",
-      "status": true,
+      "quantidade_disponivel": 0,
+      "subcategoria_id": 2,
+      "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "updatedAt": "2024-12-07T21:06:52.198Z"
     },
     {
       "id": "6",
@@ -379,6 +379,8 @@
       "nome": "Genilson Daniel",
       "matricula": "20230001",
       "email": "yoga.daniel@exemplo.com",
+      "livros": 2,
+      "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     },
@@ -388,6 +390,8 @@
       "nome": "Josué Rufino",
       "matricula": "20220099",
       "email": "josue.rufino@exemplo.com",
+      "livros": 3,
+      "penality": true,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     },
@@ -397,6 +401,8 @@
       "nome": "Benicio Hossi",
       "matricula": "20221668",
       "email": "balumuca.hossi@exemplo.com",
+      "livros": 0,
+      "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     },
@@ -406,6 +412,8 @@
       "nome": "Jandira Pena",
       "matricula": "20220000",
       "email": "testa.pena@exemplo.com",
+      "livros": 0,
+      "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     }
@@ -445,6 +453,87 @@
       "estudante_id": 2,
       "data_emprestimo": "2024-12-06",
       "data_devolucao": "2024-12-09",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "54f5",
+      "livro_id": 4,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "5a87",
+      "livro_id": 3,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "05ab",
+      "livro_id": 3,
+      "estudante_id": 1,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "5f3e",
+      "livro_id": 3,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "c07b",
+      "livro_id": 3,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "3ed2",
+      "livro_id": 4,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "82cc",
+      "livro_id": 4,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "2e48",
+      "livro_id": 4,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "1c45",
+      "livro_id": 6,
+      "estudante_id": 1,
+      "data_emprestimo": "2024-12-07",
+      "data_devolucao": "2024-12-10",
       "data_devolvida": null,
       "status": 0
     }

@@ -175,7 +175,7 @@ const useEstudante = useStudentStore();
 const useEmprestimos = useEmprestimosStore();
 const route = useRoute();
 const estudanteId = ref("");
-const loadingEstudante = ref(false)
+const loadingEstudante = ref(false);
 const dataBook = computed(() => useBook.getBookId);
 
 const form = ref({
@@ -187,6 +187,8 @@ const form = ref({
   dataEmprestimo: "",
   dataDevolucao: "",
 });
+const penalitity = ref();
+const numberLivros = ref();
 
 const fbook = async () => {
   await useBook.fetchBookById(route.query.livroId);
@@ -227,6 +229,7 @@ function resetForm() {
     dataDevolucao: getReturnDate(),
   };
 }
+
 // Função de busca de estudante
 async function buscarEstudantePorMatricula() {
   const matricula = form.value.numeroMatricula;
@@ -245,10 +248,31 @@ async function buscarEstudantePorMatricula() {
 
   try {
     const estudantes = await useEstudante.filterByMatricula(matricula);
-    console.log("eeee", estudantes)
     if (estudantes && estudantes.length > 0) {
-      form.value.nomeEstudante = estudantes[0].nome;
-      estudanteId.value = estudantes[0].id;
+      const estudante = estudantes[0];
+      form.value.nomeEstudante = estudante.nome;
+      estudanteId.value = estudante.id;
+      penalitity.value = estudante.penality;
+      numberLivros.value = estudante.livros;
+
+      // Verificando a quantidade de livros emprestados e a penalidade
+      if (estudante.livros >= 3) {
+        Swal.fire({
+          icon: "warning",
+          title: "Limite de Livros",
+          text: "Este estudante já atingiu o limite de 3 livros emprestados.",
+        });
+        return;
+      }
+
+      if (estudante.penalty === true) {
+        Swal.fire({
+          icon: "warning",
+          title: "Penalidade",
+          text: "Este estudante está com penalidade e não pode realizar o empréstimo.",
+        });
+        return;
+      }
     } else {
       form.value.nomeEstudante = "";
       Swal.fire({
@@ -272,74 +296,102 @@ async function buscarEstudantePorMatricula() {
 
 // Função para finalizar o empréstimo
 async function finalizarEmprestimo() {
-  const dadosCadastro = {
-    livro_id: parseInt(route.query.livroId, 10),
-    estudante_id: parseInt(estudanteId.value, 10),
-    data_emprestimo: form.value.dataEmprestimo,
-    data_devolucao: form.value.dataDevolucao,
-    data_devolvida: null,
-    status: 0,
-  };
+  console.log(penalitity.value, numberLivros.value);
+  if (!penalitity.value || numberLivros.value < 3) {
+    const dadosCadastro = {
+      livro_id: parseInt(route.query.livroId, 10),
+      estudante_id: parseInt(estudanteId.value, 10),
+      data_emprestimo: form.value.dataEmprestimo,
+      data_devolucao: form.value.dataDevolucao,
+      data_devolvida: null,
+      status: 0,
+    };
 
-  try {
-    if (dataBook.value.quantidade_disponivel - 1 === 0) {
-      const updatedData = {
-        id: parseInt(dataBook.value.id, 10),
-        titulo: dataBook.value.titulo,
-        descricao: dataBook.value.descricao,
-        autor: dataBook.value.autor,
-        imagem: dataBook.value.imagem,
-        isbn: dataBook.value.isbn,
-        ano_publicacao: parseInt(dataBook.value.ano_publicacao, 10),
-        quantidade_total: parseInt(dataBook.value.quantidade_total, 10),
-        quantidade_disponivel: 0,
-        subcategoria_id: parseInt(dataBook.value.subcategoria_id, 10),
-        status: false,
-        createdAt: dataBook.value.createdAt,
-        updatedAt: new Date().toISOString(),
+    try {
+      if (dataBook.value.quantidade_disponivel - 1 === 0) {
+        const updatedData = {
+          id: parseInt(dataBook.value.id, 10),
+          titulo: dataBook.value.titulo,
+          descricao: dataBook.value.descricao,
+          autor: dataBook.value.autor,
+          imagem: dataBook.value.imagem,
+          isbn: dataBook.value.isbn,
+          ano_publicacao: parseInt(dataBook.value.ano_publicacao, 10),
+          quantidade_total: parseInt(dataBook.value.quantidade_total, 10),
+          quantidade_disponivel: 0,
+          subcategoria_id: parseInt(dataBook.value.subcategoria_id, 10),
+          status: false,
+          createdAt: dataBook.value.createdAt,
+          updatedAt: new Date().toISOString(),
+        };
+        await useBook.updateBook(dataBook.value.id, updatedData);
+      } else {
+        const updatedData = {
+          id: parseInt(dataBook.value.id, 10),
+          titulo: dataBook.value.titulo,
+          descricao: dataBook.value.descricao,
+          autor: dataBook.value.autor,
+          imagem: dataBook.value.imagem,
+          isbn: dataBook.value.isbn,
+          ano_publicacao: parseInt(dataBook.value.ano_publicacao, 10),
+          quantidade_total: parseInt(dataBook.value.quantidade_total, 10),
+          quantidade_disponivel:
+            parseInt(dataBook.value.quantidade_disponivel, 10) - 1,
+          subcategoria_id: parseInt(dataBook.value.subcategoria_id, 10),
+          status: dataBook.value.status,
+          createdAt: dataBook.value.createdAt,
+          updatedAt: new Date().toISOString(),
+        };
+        await useBook.updateBook(dataBook.value.id, updatedData);
+      }
+      // Atualizando dados do estudante com incremento no campo livros
+      await useEstudante.fetchStudentById(estudanteId.value);
+      const updatedStudentData = {
+        ...useEstudante.getStudentById, // Obtendo dados do estudante atual
+        livros: numberLivros.value + 1, // Incrementando o número de livros
       };
-      await useBook.updateBook(dataBook.value.id, updatedData);
-    } else {
-      const updatedData = {
-        id: parseInt(dataBook.value.id, 10),
-        titulo: dataBook.value.titulo,
-        descricao: dataBook.value.descricao,
-        autor: dataBook.value.autor,
-        imagem: dataBook.value.imagem,
-        isbn: dataBook.value.isbn,
-        ano_publicacao: parseInt(dataBook.value.ano_publicacao, 10),
-        quantidade_total: parseInt(dataBook.value.quantidade_total, 10),
-        quantidade_disponivel:
-          parseInt(dataBook.value.quantidade_disponivel, 10) - 1,
-        subcategoria_id: parseInt(dataBook.value.subcategoria_id, 10),
-        status: dataBook.value.status,
-        createdAt: dataBook.value.createdAt,
-        updatedAt: new Date().toISOString(),
-      };
-      await useBook.updateBook(dataBook.value.id, updatedData);
+
+      await useEstudante.editStudentPartial(
+        estudanteId.value,
+        updatedStudentData
+      );
+
+      await useEmprestimos.cadastrarEmprestimo(dadosCadastro);
+
+      Swal.fire({
+        icon: "success",
+        title: "Empréstimo realizado",
+        text: "O empréstimo foi cadastrado com sucesso!",
+      });
+
+      resetForm();
+
+      const modal = bootstrap.Modal.getInstance(
+        document.getElementById("emprestimoModal")
+      );
+      modal.hide();
+    } catch (error) {
+      console.error("Erro ao cadastrar o empréstimo:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "Erro ao realizar o empréstimo. Tente novamente.",
+      });
     }
-
-    await useEmprestimos.cadastrarEmprestimo(dadosCadastro);
-
-    Swal.fire({
-      icon: "success",
-      title: "Empréstimo realizado",
-      text: "O empréstimo foi cadastrado com sucesso!",
-    });
-
-    resetForm();
-
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById("emprestimoModal")
-    );
-    modal.hide();
-  } catch (error) {
-    console.error("Erro ao cadastrar o empréstimo:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Erro",
-      text: "Erro ao realizar o empréstimo. Tente novamente.",
-    });
+  } else {
+    if (penalitity.value === false) {
+      Swal.fire({
+        icon: "warning",
+        title: "Empréstimo",
+        text: "Este estudante não pode realizar emprestimos pois tem uma penalidade",
+      });
+    } else if (numberLivros.value >= 3) {
+      Swal.fire({
+        icon: "warning",
+        title: "Empréstimo",
+        text: "Este estudante não pode realizar emprestimos pois já tem 3 livros emprestados",
+      });
+    }
   }
 }
 

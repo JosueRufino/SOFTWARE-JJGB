@@ -81,11 +81,9 @@ export const useStudentStore = defineStore("student", {
         if (response) {
           const studants = response; // Dados recebidos
           console.log(studants);
-    
+
           // Retorna os estudantes filtrados sem sobrescrever a função
-          return studants.filter((student) =>
-            student.matricula === matricula
-          );
+          return studants.filter((student) => student.matricula === matricula);
         }
       } catch (error) {
         console.error("Erro ao filtrar por matrícula:", error);
@@ -94,7 +92,7 @@ export const useStudentStore = defineStore("student", {
         this.loading = false;
       }
     },
-    
+
     // Adicionar novo estudante
     async addStudent() {
       this.loading = true;
@@ -128,44 +126,43 @@ export const useStudentStore = defineStore("student", {
       }
     },
 
-    // Editar estudante
-    async editStudent(id) {
+    // Editar estudante parcialmente
+    async editStudentPartial(id, updatedFields) {
       this.loading = true;
       this.error = null;
       try {
-        const formData = new FormData();
-        formData.append("nome", this.form.nome);
-        formData.append("email", this.form.email);
-        formData.append("matricula", this.form.matricula);
-        if (this.form.imagem) {
-          formData.append("imagem", this.form.imagem);
-        }
-
+        // Envia apenas os campos que foram atualizados
         const response = await $fetch(
           `http://localhost:3001/estudantes/${id}`,
           {
-            method: "PUT",
-            body: formData,
-            headers: { Accept: "application/json" },
+            method: "PATCH", // PATCH é ideal para atualizações parciais
+            body: updatedFields,
+            headers: { "Content-Type": "application/json" },
           }
         );
 
         if (response) {
           const index = this.students.findIndex((student) => student.id === id);
           if (index !== -1) {
-            this.students[index] = response;
-            this.filteredStudents[index] = response;
+            // Atualiza apenas os campos editados na store
+            this.students[index] = {
+              ...this.students[index],
+              ...updatedFields,
+            };
+            this.filteredStudents[index] = {
+              ...this.filteredStudents[index],
+              ...updatedFields,
+            };
           }
         }
       } catch (error) {
-        console.error("Erro ao editar estudante:", error);
-        this.error = error.message || "Erro ao editar estudante";
+        console.error("Erro ao editar estudante parcialmente:", error);
+        this.error = error.message || "Erro ao editar estudante parcialmente";
         throw error;
       } finally {
         this.loading = false;
       }
     },
-
     // Deletar estudante
     async deleteStudent(id) {
       this.loading = true;
