@@ -72,13 +72,21 @@ export const useStudentStore = defineStore("student", {
     },
 
     // Filtrar por matrícula
-    filterByMatricula(matricula) {
+    async filterByMatricula(matricula) {
       this.loading = true;
       try {
-        console.log(this.students);
-        this.filterByMatricula = this.students.filter((student) =>
-          student.matricula.includes(matricula)
-        );
+        const response = await $fetch("http://localhost:3001/estudantes", {
+          method: "GET",
+        });
+        if (response) {
+          const studants = response; // Dados recebidos
+          console.log(studants);
+    
+          // Retorna os estudantes filtrados sem sobrescrever a função
+          return studants.filter((student) =>
+            student.matricula.includes(matricula)
+          );
+        }
       } catch (error) {
         console.error("Erro ao filtrar por matrícula:", error);
         this.error = error.message || "Erro ao filtrar os estudantes";
@@ -86,7 +94,7 @@ export const useStudentStore = defineStore("student", {
         this.loading = false;
       }
     },
-
+    
     // Adicionar novo estudante
     async addStudent() {
       this.loading = true;

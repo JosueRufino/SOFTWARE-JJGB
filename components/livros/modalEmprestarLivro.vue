@@ -1,15 +1,25 @@
 <template>
   <div>
     <!-- Modal -->
-    <div class="modal fade" id="emprestimoModal" tabindex="-1" aria-labelledby="emprestimoModalLabel"
-      aria-hidden="true">
+    <div
+      class="modal fade"
+      id="emprestimoModal"
+      tabindex="-1"
+      aria-labelledby="emprestimoModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="emprestimoModalLabel">
               Realizar Empréstimo
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <form @submit.prevent="finalizarEmprestimo">
             <div class="modal-body">
@@ -18,17 +28,35 @@
                 <legend>Dados do Livro</legend>
                 <div class="row">
                   <div class="mb-3 col">
-                    <label for="nomeLivro" class="form-label">Nome do Livro</label>
-                    <input type="text" id="nomeLivro" v-model="form.nomeLivro" class="form-control" required disabled />
+                    <label for="nomeLivro" class="form-label"
+                      >Nome do Livro</label
+                    >
+                    <input
+                      type="text"
+                      id="nomeLivro"
+                      v-model="form.nomeLivro"
+                      class="form-control"
+                      required
+                      disabled
+                    />
                   </div>
                   <div class="mb-3 col">
                     <label for="isbn" class="form-label">ISBN</label>
-                    <input type="text" id="isbn" v-model="form.isbn" class="form-control" required disabled />
+                    <input
+                      type="text"
+                      id="isbn"
+                      v-model="form.isbn"
+                      class="form-control"
+                      required
+                      disabled
+                    />
                   </div>
                 </div>
               </fieldset>
               <div class="mb-3">
-                <button type="button" class="btn btn-secondary" @click="fbook">Buscar Livro</button>
+                <button type="button" class="btn btn-secondary" @click="fbook">
+                  Buscar Livro
+                </button>
               </div>
 
               <!-- Dados do Estudante -->
@@ -36,21 +64,41 @@
                 <legend>Dados do Estudante</legend>
                 <div class="row">
                   <div class="mb-3 col">
-                    <label for="numeroMatricula" class="form-label">Número de Matrícula</label>
-                    <input type="text" id="numeroMatricula" v-model="form.numeroMatricula" class="form-control"
-                      required />
+                    <label for="numeroMatricula" class="form-label"
+                      >Número de Matrícula</label
+                    >
+                    <input
+                      type="text"
+                      id="numeroMatricula"
+                      v-model="form.numeroMatricula"
+                      class="form-control"
+                      required
+                    />
                   </div>
                   <div class="mb-3 col">
-                    <label for="nomeEstudante" class="form-label">Nome do Estudante</label>
-                    <input type="text" id="nomeEstudante" v-model="form.nomeEstudante" class="form-control" disabled />
+                    <label for="nomeEstudante" class="form-label"
+                      >Nome do Estudante</label
+                    >
+                    <input
+                      type="text"
+                      id="nomeEstudante"
+                      v-model="form.nomeEstudante"
+                      class="form-control"
+                      disabled
+                    />
                   </div>
                 </div>
               </fieldset>
 
               <!-- Botão para buscar estudante manualmente -->
               <div class="mb-3">
-                <button type="button" class="btn btn-secondary" @click="buscarEstudantePorMatricula">Buscar
-                  Estudante</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  @click="buscarEstudantePorMatricula"
+                >
+                  Buscar Estudante
+                </button>
               </div>
 
               <!-- Dados Extras -->
@@ -58,21 +106,41 @@
                 <legend>Dados do Extras</legend>
                 <div class="row">
                   <div class="mb-3 col">
-                    <label for="dataEmprestimo" class="form-label">Data do Empréstimo</label>
-                    <input type="date" id="dataEmprestimo" v-model="form.dataEmprestimo" class="form-control" required
-                      disabled />
+                    <label for="dataEmprestimo" class="form-label"
+                      >Data do Empréstimo</label
+                    >
+                    <input
+                      type="date"
+                      id="dataEmprestimo"
+                      v-model="form.dataEmprestimo"
+                      class="form-control"
+                      required
+                      disabled
+                    />
                   </div>
                   <div class="mb-3 col">
-                    <label for="dataDevolucao" class="form-label">Data para Devolução</label>
-                    <input type="date" id="dataDevolucao" v-model="form.dataDevolucao" class="form-control" required
-                      disabled />
+                    <label for="dataDevolucao" class="form-label"
+                      >Data para Devolução</label
+                    >
+                    <input
+                      type="date"
+                      id="dataDevolucao"
+                      v-model="form.dataDevolucao"
+                      class="form-control"
+                      required
+                      disabled
+                    />
                   </div>
                 </div>
               </fieldset>
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
                 Cancelar
               </button>
               <button type="submit" class="btn btn-primary">
@@ -168,13 +236,11 @@ async function buscarEstudantePorMatricula() {
   }
 
   try {
-    await useEstudante.fetchStudents();
-    await useEstudante.filterByMatricula(matricula);
-
-    const estudante = useEstudante.getStudantesByMatricula;
-    if (estudante && estudante.length > 0) {
-      form.value.nomeEstudante = estudante[0].nome;
-      estudanteId.value = estudante[0].id;
+    const estudantes = await useEstudante.filterByMatricula(matricula);
+    console.log("Estudantes encontrados:", estudantes);
+    if (estudantes && estudantes.length > 0) {
+      form.value.nomeEstudante = estudantes[0].nome;
+      estudanteId.value = estudantes[0].id;
     } else {
       form.value.nomeEstudante = "";
       Swal.fire({
