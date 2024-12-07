@@ -23,9 +23,14 @@ export const useSubcategoryStore = defineStore("subcategory", {
 
         // Adiciona as informações completas da categoria dentro de cada subcategoria
         const subcategoriesWithCategories = subcategories.map((subcategory) => {
-          const category = categories.find(
-            (category) => category.id === subcategory.categoria_id.toString()
-          );
+          if (!subcategory.categoria_id) {
+            console.warn("Subcategoria com categoria_id ausente:", subcategory);
+          }
+
+          const category = categories.find((category) => {
+            return category.id === String(subcategory.categoria_id || "");
+          });
+
           return {
             ...subcategory,
             categoria: category || null, // Inclui a categoria ou null se não for encontrada
@@ -43,14 +48,16 @@ export const useSubcategoryStore = defineStore("subcategory", {
       }
     },
 
-    async fetchSubcategoryId(id){
-      try{
-        const response = await $fetch(`http://localhost:3001/subcategorias/${id}`)
-        if(response){
-          this.subcategory = response
+    async fetchSubcategoryId(id) {
+      try {
+        const response = await $fetch(
+          `http://localhost:3001/subcategorias/${id}`
+        );
+        if (response) {
+          this.subcategory = response;
         }
-      }catch(erro){
-        console.log(error)
+      } catch (erro) {
+        console.log(error);
       }
     },
 

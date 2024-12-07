@@ -236,6 +236,31 @@
       "status": true,
       "createdAt": "2024-12-04T11:22:41.840Z",
       "updatedAt": "2024-12-04T11:22:41.840Z"
+    },
+    {
+      "id": "c3a2",
+      "titulo": "novo livro",
+      "autor": "Benicio Hossi",
+      "isbn": "sdsd",
+      "ano_publicacao": 2024,
+      "quantidade_disponivel": 1,
+      "subcategoria_id": 1,
+      "status": false,
+      "createdAt": "2024-12-06T19:44:53.263Z",
+      "updatedAt": "2024-12-06T19:44:53.263Z"
+    },
+    {
+      "id": "81a6",
+      "titulo": "Testa da Jandira",
+      "autor": "Dama do peperone",
+      "isbn": "peperone",
+      "ano_publicacao": 2024,
+      "quantidade_total": null,
+      "quantidade_disponivel": 0,
+      "subcategoria_id": 1,
+      "status": false,
+      "createdAt": "2024-12-06T20:39:09.516Z",
+      "updatedAt": "2024-12-06T20:50:36.173Z"
     }
   ],
   "categories": [
@@ -339,6 +364,12 @@
       "categoria_id": 8,
       "nome": "Foco",
       "createdAt": "2024-12-04 10:57:37"
+    },
+    {
+      "id": "b784",
+      "categoria_id": null,
+      "nome": "benicio",
+      "createdAt": "2024-12-06 20:36:49"
     }
   ],
   "estudantes": [
@@ -407,6 +438,15 @@
       "data_devolucao": "2024-12-04",
       "data_devolvida": null,
       "status": 0
+    },
+    {
+      "id": "0254",
+      "livro_id": 81,
+      "estudante_id": 2,
+      "data_emprestimo": "2024-12-06",
+      "data_devolucao": "2024-12-09",
+      "data_devolvida": null,
+      "status": 0
     }
   ],
   "filaEspera": [
@@ -436,6 +476,15 @@
       "notificado": false,
       "createdAt": "2024-12-01T18:07:36.679Z",
       "updatedAt": "2024-12-01T18:07:36.679Z"
+    },
+    {
+      "id": "80c1",
+      "livro_id": null,
+      "estudante_id": 1,
+      "posicao": 1,
+      "notificado": false,
+      "createdAt": "2024-12-06T20:51:55.947Z",
+      "updatedAt": "2024-12-06T20:51:55.947Z"
     }
   ],
   "alertas": [
