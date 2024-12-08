@@ -25,18 +25,6 @@
         <form @submit.prevent="handleSubmit">
           <div class="modal-body">
             <div class="container">
-              <div class="row">
-                <div class="col">
-                  <label for="imagem" class="form-label">Imagem</label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="imagem"
-                    @change="handleImageUpload"
-                    accept="image/*"
-                  />
-                </div>
-              </div>
               <div class="row g-3">
                 <div class="col-md-6">
                   <label for="titulo" class="form-label">Título</label>
@@ -98,7 +86,8 @@
                     type="number"
                     class="form-control"
                     id="quantidade_disponivel"
-                    v-model="form.quantidade_disponivel"
+                    v-model="form.quantidade_total"
+                    @input="syncQuantidadeDisponivel"
                     required
                   />
                 </div>
@@ -116,7 +105,7 @@
                       Selecione uma subcategoria
                     </option>
                     <option
-                      v-for="categoria in subcategorias"
+                      v-for="categoria in subcat"
                       :key="categoria.id"
                       :value="categoria.id"
                     >
@@ -175,9 +164,10 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import Swal from "sweetalert2";
-import { useBookStore } from "@/store/books/index"; // Ajustar o caminho para o store, se necessário
+import { useBookStore } from "@/store/books/index"; // Ajuste conforme o caminho correto
+import { useSubcategoryStore } from "@/store/subcategory/index";
 
 const form = reactive({
   titulo: "",
@@ -186,24 +176,30 @@ const form = reactive({
   imagem: null,
   isbn: "",
   ano_publicacao: "",
-  quantidade_disponivel: "",
+  quantidade_total: 0,
+  quantidade_disponivel: 0,
   subcategoria_id: "",
   status: "true",
 });
 
-// Exemplo de subcategorias (geralmente vindo de uma API ou store)
-const subcategorias = [
-  { id: 1, nome: "Ficção" },
-  { id: 2, nome: "História" },
-  { id: 3, nome: "Ciência" },
-];
+// Atualiza a quantidade disponível para igualar a quantidade total
+const syncQuantidadeDisponivel = () => {
+  form.quantidade_disponivel = form.quantidade_total;
+};
 
-// Função para lidar com o upload da imagem
+// Obtém as subcategorias do store
+const subcat = computed(() => useSubcategoryStore().subcategories);
+
+onMounted(async () => {
+  await useSubcategoryStore().fetchSubcategoriesAndCategories();
+});
+
+// Função para lidar com o upload de imagem
 const handleImageUpload = (event) => {
   form.imagem = event.target.files[0];
 };
 
-// Chama o store para adicionar o livro
+// Função para submeter o formulário
 const handleSubmit = async () => {
   try {
     // Envia os dados para o store ou API
@@ -221,7 +217,7 @@ const handleSubmit = async () => {
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
 
-      // Atualiza a página
+      // Atualiza a página ou faz outra ação necessária
       window.location.reload();
     });
   } catch (error) {

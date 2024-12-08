@@ -37,7 +37,7 @@
           <strong>Quantidade total:</strong> {{ book.quantidade_total }}
         </p>
         <p class="mb-0">
-          <strong>Quantidade total:</strong> {{ book.quantidade_disponivel }}
+          <strong>Quantidade disponível:</strong> {{ book.quantidade_disponivel }}
         </p>
         <p class="mb-0"><strong>Subcategoria:</strong> {{ subcategory }}</p>
       </div>
