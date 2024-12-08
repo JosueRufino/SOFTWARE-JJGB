@@ -9,7 +9,7 @@
       "isbn": "978-3-16-148410-0",
       "ano_publicacao": 1605,
       "quantidade_total": 3,
-      "quantidade_disponivel": 0,
+      "quantidade_disponivel": 8,
       "subcategoria_id": "1",
       "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
@@ -39,7 +39,7 @@
       "isbn": "978-3-16-148410-2",
       "ano_publicacao": 1610,
       "quantidade_total": 3,
-      "quantidade_disponivel": 0,
+      "quantidade_disponivel": 2,
       "subcategoria_id": 1,
       "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
@@ -84,7 +84,7 @@
       "isbn": "978-3-16-148410-5",
       "ano_publicacao": 2015,
       "quantidade_total": 5,
-      "quantidade_disponivel": 2,
+      "quantidade_disponivel": 3,
       "subcategoria_id": "2",
       "status": true,
       "createdAt": "2024-11-02T09:00:00Z",
@@ -379,8 +379,9 @@
       "nome": "Genilson Daniel",
       "matricula": "20230001",
       "email": "yoga.daniel@exemplo.com",
-      "livros": 2,
-      "penality": false,
+      "livros": -3,
+      "data_penalidade": "2024-12-08T18:33:58.978Z",
+      "penality": true,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
     },
@@ -390,7 +391,8 @@
       "nome": "Josué Rufino",
       "matricula": "20220099",
       "email": "josue.rufino@exemplo.com",
-      "livros": 3,
+      "livros": -3,
+      "data_penalidade": "2024-12-08T18:26:51.933Z",
       "penality": true,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
@@ -402,6 +404,7 @@
       "matricula": "20221668",
       "email": "balumuca.hossi@exemplo.com",
       "livros": 0,
+      "data_penalidade": null,
       "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
@@ -413,6 +416,7 @@
       "matricula": "20220000",
       "email": "testa.pena@exemplo.com",
       "livros": 0,
+      "data_penalidade": null,
       "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
@@ -435,8 +439,8 @@
       "estudante_id": 2,
       "data_emprestimo": "2024-12-01",
       "data_devolucao": "2024-12-04",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T18:26:51.933Z",
+      "status": 1
     },
     {
       "id": "e712",
@@ -444,8 +448,8 @@
       "estudante_id": 1,
       "data_emprestimo": "2024-12-01",
       "data_devolucao": "2024-12-04",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T18:33:58.978Z",
+      "status": 1
     },
     {
       "id": "0254",
@@ -480,8 +484,8 @@
       "estudante_id": 1,
       "data_emprestimo": "2024-12-07",
       "data_devolucao": "2024-12-10",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T18:34:38.194Z",
+      "status": 1
     },
     {
       "id": "5f3e",
@@ -534,8 +538,8 @@
       "estudante_id": 1,
       "data_emprestimo": "2024-12-07",
       "data_devolucao": "2024-12-10",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T18:34:51.170Z",
+      "status": 1
     }
   ],
   "filaEspera": [

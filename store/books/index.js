@@ -181,6 +181,54 @@ export const useBookStore = defineStore("book", {
       }
     },
 
+    async updateBookPartial(bookId, updatedData) {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        if (!bookId) {
+          throw new Error("ID do livro é inválido ou não foi fornecido.");
+        }
+
+        // Verificar os dados a serem atualizados
+        if (!Object.keys(updatedData).length) {
+          throw new Error("Nenhum dado fornecido para atualizar o livro.");
+        }
+
+        // Fazer a requisição PATCH para atualizar parcialmente o livro
+        const response = await $fetch(
+          `http://localhost:3001/livros/${bookId}`,
+          {
+            method: "PATCH",
+            body: JSON.stringify(updatedData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        // Atualizar estado local após sucesso
+        if (response) {
+          const index = this.books.findIndex((book) => book.id === bookId);
+          if (index !== -1) {
+            this.books[index] = { ...this.books[index], ...updatedData };
+            this.filteredBooks[index] = {
+              ...this.filteredBooks[index],
+              ...updatedData,
+            };
+          }
+
+          console.log("Livro atualizado parcialmente com sucesso:", response);
+          return response;
+        }
+      } catch (error) {
+        console.error("Erro ao atualizar parcialmente o livro:", error);
+        this.error = error.message || "Erro ao atualizar parcialmente o livro.";
+        throw error;
+      } finally {
+        this.loading = false;
+      }
+    },
     // Função para atualizar os dados do livro
     async updateBook(bookId, updatedData) {
       this.loading = true;
@@ -250,7 +298,7 @@ export const useBookStore = defineStore("book", {
     async addBook(form) {
       this.loading = true;
       this.error = null;
-      console.log(form)
+      console.log(form);
 
       try {
         // Criar FormData para upload
@@ -274,7 +322,7 @@ export const useBookStore = defineStore("book", {
           updatedAt: currentDate, // Atribui a mesma data para atualização
         };
 
-        console.log("bookDta", bookData)
+        console.log("bookDta", bookData);
 
         formData.append("book", JSON.stringify(bookData));
 
@@ -282,7 +330,7 @@ export const useBookStore = defineStore("book", {
         if (form.imagem) {
           formData.append("imagem", form.imagem);
         }
-        console.log("formData", formData)
+        console.log("formData", formData);
         // Enviar requisição POST para criar livro
         const response = await $fetch("http://localhost:3001/livros", {
           method: "POST",
@@ -291,7 +339,7 @@ export const useBookStore = defineStore("book", {
             Accept: "application/json",
           },
         });
-        console.log("respnse", response)
+        console.log("respnse", response);
         // Adicionar o novo livro ao estado local
         if (response) {
           this.books.push(response);

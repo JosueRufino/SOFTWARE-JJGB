@@ -2,6 +2,7 @@
   <div class="card text-center border-0" style="width: 15rem">
     <img
       :src="studant?.imagem"
+      v-if="studant && studant.imagem"
       class="rounded-circle mx-auto mt-2"
       alt="User avatar"
       style="width: 100px; height: 100px"
