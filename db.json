@@ -391,7 +391,7 @@
       "nome": "Josué Rufino",
       "matricula": "20220099",
       "email": "josue.rufino@exemplo.com",
-      "livros": -3,
+      "livros": -10,
       "data_penalidade": "2024-12-08T18:26:51.933Z",
       "penality": true,
       "createdAt": "2024-11-01T09:00:00Z",
@@ -457,8 +457,8 @@
       "estudante_id": 2,
       "data_emprestimo": "2024-12-06",
       "data_devolucao": "2024-12-09",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T19:55:20.154Z",
+      "status": 1
     },
     {
       "id": "54f5",
@@ -466,8 +466,8 @@
       "estudante_id": 2,
       "data_emprestimo": "2024-12-07",
       "data_devolucao": "2024-12-10",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T19:56:04.153Z",
+      "status": 1
     },
     {
       "id": "5a87",
@@ -529,8 +529,8 @@
       "estudante_id": 2,
       "data_emprestimo": "2024-12-07",
       "data_devolucao": "2024-12-10",
-      "data_devolvida": null,
-      "status": 0
+      "data_devolvida": "2024-12-08T19:56:20.217Z",
+      "status": 1
     },
     {
       "id": "1c45",

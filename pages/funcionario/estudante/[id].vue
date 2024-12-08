@@ -134,8 +134,8 @@
                           <h5 class="mb-0 text-truncate">
                             {{ emprestimo?.livro?.nome }}
                           </h5>
-                          <small class="text-muted"
-                            > ISBN {{ emprestimo.livro?.isbn }}</small
+                          <small class="text-muted">
+                            ISBN: {{ emprestimo.livro?.isbn }}</small
                           >
                         </div>
                         <div class="row">
@@ -188,7 +188,59 @@
                 <h5 class="mb-0">Documentos</h5>
               </div>
               <div class="card-body">
-                <p class="text-muted">Nenhum documento disponível.</p>
+                <div class="container mt-4">
+                  <!-- Título da Seção -->
+                  <h3 class="mb-3">Histórico de Empréstimos</h3>
+
+                  <!-- Tabela com classes do Bootstrap -->
+                  <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Data de Empréstimo</th>
+                        <th scope="col">Data de Devolução</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="emprestimo in emprest" :key="emprestimo.id">
+                        <td scope="row">{{ emprestimo?.livro?.titulo }}</td>
+                        <td>
+                          {{ emprestimo?.livro?.autor || "Desconhecido" }}
+                        </td>
+                        <td>{{ emprestimo?.livro?.isbn || "N/A" }}</td>
+                        <td>{{ formatDate(emprestimo?.data_emprestimo) }}</td>
+                        <td>{{ formatDate(emprestimo?.data_devolucao) }}</td>
+                        <td>
+                          <span
+                            class="badge"
+                            :class="
+                              emprestimo.status === 1
+                                ? 'bg-success'
+                                : 'bg-warning'
+                            "
+                          >
+                            {{
+                              emprestimo.status === 1 ? "Devolvido" : "Pendente"
+                            }}
+                          </span>
+                        </td>
+                        <td>
+                          <button
+                            v-if="emprestimo.status !== 1"
+                            class="btn btn-outline-primary btn-sm"
+                            @click="selecionarEmprestimo(emprestimo)"
+                          >
+                            <i class="bi bi-arrow-return-left me-2"></i>Devolver
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -227,11 +279,13 @@ const studant = computed(() => useStudant.getStudentById);
 const emprestimosPendentes = computed(
   () => useEmprestimos.emprestimosDoEstudante
 );
+const emprest = computed(() => useEmprestimos.emprestimosDoEstudante);
 
 // Carregar os dados do estudante e dos empréstimos ao montar o componente
 onMounted(async () => {
   await useStudant.fetchStudentById(route.params.id);
   await useEmprestimos.fetchEmprestimosPendentesPorEstudante(route.params.id);
+  await useEmprestimos.fetchEmprestimosPorEstudante(route.params.id);
 });
 
 // Método para formatar data

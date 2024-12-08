@@ -18,7 +18,7 @@ const localEmprestimo = ref(null);
 const penalidade = ref(false);
 const emprestimo = useEmprestimosStore();
 const studant = useStudentStore();
-const books = useBookStore();
+
 // Watch for changes in the prop
 watch(
   () => props.emprestimo,
@@ -132,7 +132,6 @@ const confirmarDevolucao = async () => {
     }
   }
 };
-
 </script>
 
 <template>
@@ -160,8 +159,8 @@ const confirmarDevolucao = async () => {
           <div v-if="localEmprestimo" class="row">
             <div class="col-md-4 text-center mb-3">
               <img
-                v-if="localEmprestimo.livro.imagem"
-                :src="localEmprestimo.livro.imagem"
+                v-if="localEmprestimo?.livro?.imagem"
+                :src="localEmprestimo?.livro?.imagem"
                 alt="Capa do Livro"
                 class="img-fluid rounded shadow-sm max-height-300"
               />
@@ -177,36 +176,36 @@ const confirmarDevolucao = async () => {
                 <div class="card-body">
                   <h6 class="card-title text-primary mb-3">
                     Detalhes do Empréstimo
-                    {{ localEmprestimo.livro.id }}
+                    {{ localEmprestimo?.livro?.id }}
                   </h6>
                   <div class="row mb-2">
                     <div class="col-6">
                       <strong>Livro:</strong>
                       <p class="text-truncate">
-                        {{ localEmprestimo.livro.titulo }}
+                        {{ localEmprestimo?.livro?.titulo }}
                       </p>
                     </div>
                     <div class="col-6">
                       <strong>Autor:</strong>
                       <p class="text-truncate">
-                        {{ localEmprestimo.livro.autor }}
+                        {{ localEmprestimo?.livro?.autor }}
                       </p>
                     </div>
                   </div>
                   <div class="row mb-2">
                     <div class="col-6">
                       <strong>ISBN:</strong>
-                      <p>{{ localEmprestimo.livro.isbn }}</p>
+                      <p>{{ localEmprestimo?.livro?.isbn }}</p>
                     </div>
                     <div class="col-6">
                       <strong>Ano de Publicação:</strong>
-                      <p>{{ localEmprestimo.livro.ano_publicacao }}</p>
+                      <p>{{ localEmprestimo?.livro?.ano_publicacao }}</p>
                     </div>
                   </div>
                   <div class="mt-3">
                     <strong>Descrição:</strong>
                     <p class="text-muted fst-italic">
-                      {{ localEmprestimo.livro.descricao || "Sem descrição" }}
+                      {{ localEmprestimo?.livro?.descricao || "Sem descrição" }}
                     </p>
                   </div>
                   <div class="card bg-light mb-3">

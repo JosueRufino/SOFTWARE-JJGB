@@ -80,6 +80,41 @@ export const useEmprestimosStore = defineStore("emprestimos", {
       }
     },
 
+    async fetchEmprestimosPorEstudante(estudanteId) {
+      try {
+        const responseEmprestimos = await fetch(
+          `http://localhost:3001/emprestimos?estudante_id=${estudanteId}`
+        );
+        const responseLivros = await fetch("http://localhost:3001/livros");
+
+        if (!responseEmprestimos.ok || !responseLivros.ok) {
+          throw new Error("Erro ao buscar dados do servidor");
+        }
+
+        const emprestimos = await responseEmprestimos.json();
+        const livros = await responseLivros.json();
+
+        const auxEm = emprestimos.filter(
+          (emprestimo) => emprestimo.status !== 0
+        );
+
+        this.emprestimosPorEstudante = auxEm.map((item) => {
+          const livro = livros.find((livro) => livro.id == item.livro_id);
+          return {
+            ...item,
+            livro,
+          };
+        });
+
+        console.log(
+          "Empréstimos para o estudante (status != 0):",
+          this.emprestimosPorEstudante
+        );
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+      }
+    },
+
     async editarEmprestimo(emprestimoId, dadosAtualizados) {
       try {
         // Verifica se os dados atualizados têm pelo menos uma propriedade
