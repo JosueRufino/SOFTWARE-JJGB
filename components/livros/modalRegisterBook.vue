@@ -58,6 +58,16 @@
                     required
                   />
                 </div>
+                <div class="col">
+                  <label for="descricao" class="form-label">Descrição</label>
+                  <textarea
+                    class="form-control"
+                    id="descricao"
+                    v-model="form.descricao"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
                 <div class="col-md-6">
                   <label for="isbn" class="form-label">ISBN</label>
                   <input
@@ -166,12 +176,14 @@
 
 <script setup>
 import { reactive } from "vue";
-import { useBookStore } from "@/store/books/index"; // Importar o store, se estiver usando Pinia, por exemplo
+import Swal from "sweetalert2";
+import { useBookStore } from "@/store/books/index"; // Ajustar o caminho para o store, se necessário
 
 const form = reactive({
   titulo: "",
   autor: "",
-  imagem: null, // Para armazenar o arquivo de imagem
+  descricao: "",
+  imagem: null,
   isbn: "",
   ano_publicacao: "",
   quantidade_disponivel: "",
@@ -188,22 +200,38 @@ const subcategorias = [
 
 // Função para lidar com o upload da imagem
 const handleImageUpload = (event) => {
-  form.imagem = event.target.files[0]; // Armazena o arquivo selecionado
+  form.imagem = event.target.files[0];
 };
 
 // Chama o store para adicionar o livro
 const handleSubmit = async () => {
   try {
-    // Atribuir o form atual ao livro a ser adicionado no store
-    await useBookStore().addBook(form); // Passa os dados do form para o store
+    // Envia os dados para o store ou API
+    await useBookStore().addBook(form);
 
-    // Fecha o modal após o cadastro
-    const modal = document.getElementById("staticBackdropRegisterBook");
-    const modalInstance = bootstrap.Modal.getInstance(modal); // Acessa a instância do modal
-    modalInstance.hide(); // Fecha o modal
-  } catch (erro) {
-    // Mostra mensagem de erro ao usuário
-    alert("Erro ao cadastrar livro");
+    // Exibe notificação de sucesso
+    Swal.fire({
+      title: "Sucesso!",
+      text: "Livro cadastrado com sucesso.",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      // Fecha o modal
+      const modal = document.getElementById("staticBackdropRegisterBook");
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+
+      // Atualiza a página
+      window.location.reload();
+    });
+  } catch (error) {
+    // Exibe notificação de erro
+    Swal.fire({
+      title: "Erro",
+      text: "Ocorreu um erro ao cadastrar o livro. Tente novamente.",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
   }
 };
 </script>

@@ -93,36 +93,27 @@ export const useStudentStore = defineStore("student", {
       }
     },
 
-    // Adicionar novo estudante
-    async addStudent() {
-      this.loading = true;
-      this.error = null;
+    async addStudent(studentData) {
       try {
-        const formData = new FormData();
-        formData.append("nome", this.form.nome);
-        formData.append("email", this.form.email);
-        formData.append("matricula", this.form.matricula);
-        if (this.form.imagem) {
-          formData.append("imagem", this.form.imagem);
-        }
+        // Adicionar o estudante no estado
+        this.students.push(studentData);
+        this.filteredStudents.push(studentData);
 
-        const response = await $fetch("http://localhost:3001/estudantes", {
+        // Aqui você pode fazer a requisição para salvar no backend se necessário
+        // Exemplo com fetch
+        const response = await fetch("http://localhost:3001/estudantes", {
           method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(studentData),
         });
-
-        if (response) {
-          this.students.push(response);
-          this.filteredStudents.push(response);
-          this.resetForm();
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Estudante cadastrado com sucesso:", data);
+        } else {
+          console.error("Erro ao cadastrar estudante:", data);
         }
       } catch (error) {
         console.error("Erro ao adicionar estudante:", error);
-        this.error = error.message || "Erro ao adicionar estudante";
-        throw error;
-      } finally {
-        this.loading = false;
       }
     },
 
