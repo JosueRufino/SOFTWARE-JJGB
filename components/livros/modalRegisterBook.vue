@@ -182,9 +182,13 @@ const form = reactive({
   status: "true",
 });
 
-// Atualiza a quantidade disponível para igualar a quantidade total
+// Atualiza a quantidade disponível para igualar a quantidade total, se válida
 const syncQuantidadeDisponivel = () => {
-  form.quantidade_disponivel = form.quantidade_total;
+  if (form.quantidade_total > 0) {
+    form.quantidade_disponivel = form.quantidade_total;
+  } else {
+    form.quantidade_disponivel = 0;
+  }
 };
 
 // Obtém as subcategorias do store
@@ -194,14 +198,36 @@ onMounted(async () => {
   await useSubcategoryStore().fetchSubcategoriesAndCategories();
 });
 
-// Função para lidar com o upload de imagem
-const handleImageUpload = (event) => {
-  form.imagem = event.target.files[0];
+// Função para validar o formulário
+const validateForm = () => {
+  const currentYear = new Date().getFullYear();
+
+  if (!form.titulo.trim()) {
+    throw new Error("O título não pode estar vazio ou conter apenas espaços.");
+  }
+
+  if (!form.autor.trim()) {
+    throw new Error("O autor não pode estar vazio ou conter apenas espaços.");
+  }
+
+  if (!/^[0-9]{13}$/.test(form.isbn)) {
+    throw new Error("O ISBN deve conter exatamente 13 caracteres numéricos.");
+  }
+
+  if (form.ano_publicacao > currentYear) {
+    throw new Error("O ano de publicação não pode ser maior que o ano atual.");
+  }
+
+  if (form.quantidade_total <= 0) {
+    throw new Error("A quantidade total de livros deve ser maior que zero.");
+  }
 };
 
 // Função para submeter o formulário
 const handleSubmit = async () => {
   try {
+    validateForm();
+
     // Envia os dados para o store ou API
     await useBookStore().addBook(form);
 
@@ -224,7 +250,7 @@ const handleSubmit = async () => {
     // Exibe notificação de erro
     Swal.fire({
       title: "Erro",
-      text: "Ocorreu um erro ao cadastrar o livro. Tente novamente.",
+      text: error.message,
       icon: "error",
       confirmButtonText: "OK",
     });
