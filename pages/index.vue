@@ -11,11 +11,16 @@
         </div>
 
         <!-- Card de login -->
-        <div class="card p-3" style="width: 400px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <div
+          class="card p-3"
+          style="width: 400px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
+        >
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <h3>Login</h3>
-              <p class="text-secondary mt-1" style="font-size: 1rem;">Identifique-se para prosseguir</p>
+              <p class="text-secondary mt-1" style="font-size: 1rem">
+                Identifique-se para prosseguir
+              </p>
             </div>
             <div>
               <img src="../public/assets/image2.png" alt="Login" />
@@ -82,7 +87,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from "~/store/auth/auth"; // Importa a store de autenticação
@@ -128,7 +132,7 @@ const handleLogin = async () => {
       });
 
       // Redireciona para a página principal
-      setTimeout(() => router.push("/funcionario"), 1500);
+      router.push("/funcionario");
     } else {
       // Mensagem de erro com SweetAlert2
       Swal.fire({
@@ -209,5 +213,4 @@ input {
   margin-right: 8px;
   vertical-align: middle;
 }
-
 </style>

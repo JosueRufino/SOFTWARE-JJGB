@@ -25,7 +25,7 @@ export const useCategoryStore = defineStore("category", {
       this.isLoading = true;
       try {
         const response = await fetch(`http://localhost:3001/categories/${id}`);
-    
+
         this.currentCategory = response;
         console.log(response, "categoria carregada com sucesso");
         return response;

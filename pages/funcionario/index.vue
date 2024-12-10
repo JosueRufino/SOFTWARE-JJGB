@@ -40,17 +40,26 @@
 </template>
 
 <script setup>
+import { useBookStore } from "@/store/books/index";
+import { useStudentStore } from "@/store/studantes/index";
+import { useFilaEsperaStore } from "@/store/filaEspera/index";
+import { useCategoryStore } from "@/store/category/index";
+import { useSubcategoryStore } from "@/store/subcategory/index";
+import { useEmprestimosStore } from "@/store/emprestimo/index";
+
 definePageMeta({
   layout: "funcionario",
 });
 
 import { reactive } from "vue";
 
+const f = ref(4);
+
 const dataCards = [
   {
     name: "Livros",
     icon: "bi bi-book-fill",
-    value: 15,
+    value: useBookStore().getTotalBooks,
   },
   {
     name: "Funcionários",
@@ -60,12 +69,12 @@ const dataCards = [
   {
     name: "Estudantes",
     icon: "bi bi-person",
-    value: 15,
+    value: 23,
   },
   {
     name: "Categorias",
     icon: "bi bi-bookmark-check-fill",
-    value: 15,
+    value: 12,
   },
   {
     name: "Subcategorias",
@@ -78,7 +87,7 @@ const dataCards = [
     value: 15,
   },
   {
-    name: "Livros emprestados",
+    name: "Emprestimos",
     icon: "bi bi-list-check",
     value: 15,
   },
@@ -88,8 +97,6 @@ const dataCards = [
     value: 15,
   },
 ];
-
-
 
 // Definindo as opções do gráfico
 const chartOptions = reactive({
@@ -127,6 +134,14 @@ const chartData = reactive([
   { value: 484, name: "Lista de espera" },
   { value: 300, name: "Livros emprestados" },
 ]);
+
+const length = computed(() => useCategoryStore().categories);
+
+onMounted(async () => {
+  await useStudentStore().fetchStudents;
+  await useBookStore().fetchBookById();
+  await useCategoryStore().fetchCategories();
+});
 </script>
 
 <style scoped>

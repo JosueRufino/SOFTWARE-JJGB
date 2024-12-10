@@ -1,7 +1,7 @@
 // stores/filaEspera.js
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useFilaEsperaStore = defineStore('filaEspera', {
+export const useFilaEsperaStore = defineStore("filaEspera", {
   state: () => ({
     filaCompleta: [], // Dados combinados da fila de espera com estudantes
   }),
@@ -10,18 +10,24 @@ export const useFilaEsperaStore = defineStore('filaEspera', {
     // Carregar fila de espera e estudantes apenas para um livro específico
     async fetchFilaPorLivro(livroId) {
       try {
-        const responseFila = await fetch(`http://localhost:3001/filaEspera?livro_id=${livroId}`);
-        const responseEstudantes = await fetch('http://localhost:3001/estudantes');
+        const responseFila = await fetch(
+          `http://localhost:3001/filaEspera?livro_id=${livroId}`
+        );
+        const responseEstudantes = await fetch(
+          "http://localhost:3001/estudantes"
+        );
 
         if (!responseFila.ok || !responseEstudantes.ok) {
-          throw new Error('Erro ao buscar dados do servidor');
+          throw new Error("Erro ao buscar dados do servidor");
         }
 
         const filaEspera = await responseFila.json();
         const estudantes = await responseEstudantes.json();
 
         this.filaCompleta = filaEspera.map((item) => {
-          const estudante = estudantes.find((estudante) => estudante.id == item.estudante_id);
+          const estudante = estudantes.find(
+            (estudante) => estudante.id == item.estudante_id
+          );
           return {
             ...item,
             estudante, // Adiciona os dados completos do estudante
@@ -30,7 +36,7 @@ export const useFilaEsperaStore = defineStore('filaEspera', {
 
         console.log(this.filaCompleta);
       } catch (error) {
-        console.error('Erro ao carregar dados:', error);
+        console.error("Erro ao carregar dados:", error);
       }
     },
 
@@ -38,7 +44,10 @@ export const useFilaEsperaStore = defineStore('filaEspera', {
     async cadastrarNaFila({ livroId, estudanteId }) {
       try {
         // Determinar a próxima posição na fila
-        const ultimaPosicao = this.filaCompleta.reduce((max, item) => Math.max(max, item.posicao), 0);
+        const ultimaPosicao = this.filaCompleta.reduce(
+          (max, item) => Math.max(max, item.posicao),
+          0
+        );
         const novaPosicao = ultimaPosicao + 1;
 
         // Dados para o novo registro na fila de espera
@@ -52,16 +61,16 @@ export const useFilaEsperaStore = defineStore('filaEspera', {
         };
 
         // Enviar os dados para a API
-        const response = await fetch('http://localhost:3001/filaEspera', {
-          method: 'POST',
+        const response = await fetch("http://localhost:3001/filaEspera", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(novoRegistro),
         });
 
         if (!response.ok) {
-          throw new Error('Erro ao cadastrar na fila de espera');
+          throw new Error("Erro ao cadastrar na fila de espera");
         }
 
         const registroCriado = await response.json();
@@ -72,10 +81,13 @@ export const useFilaEsperaStore = defineStore('filaEspera', {
           estudante: null, // O estudante será carregado na próxima fetchFilaPorLivro
         });
 
-        console.log('Cadastro na fila de espera realizado com sucesso:', registroCriado);
+        console.log(
+          "Cadastro na fila de espera realizado com sucesso:",
+          registroCriado
+        );
         return registroCriado;
       } catch (error) {
-        console.error('Erro ao cadastrar na fila de espera:', error);
+        console.error("Erro ao cadastrar na fila de espera:", error);
         throw error; // Lança o erro para que a interface possa lidar com ele
       }
     },
