@@ -17,7 +17,7 @@ export const useAuthStore = defineStore("auth", {
           method: "GET",
           query: { email },
         });
-        console.log("user")
+        console.log("user");
         // Verifica se encontrou algum usuário com o email fornecido
         if (response && response.length > 0) {
           const user = response[0]; // Pega o primeiro usuário encontrado
@@ -40,7 +40,10 @@ export const useAuthStore = defineStore("auth", {
         }
       } catch (error) {
         console.error("Erro ao fazer login:", error);
-        return { success: false, message: "Erro ao conectar ao servidor. Tente novamente." };
+        return {
+          success: false,
+          message: "Erro ao conectar ao servidor. Tente novamente.",
+        };
       }
     },
 

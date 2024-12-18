@@ -495,11 +495,35 @@
   "funcionarios": [
     {
       "id": "1",
+      "nome": "Admin admin",
+      "email": "Admin.admin@exemplo.com",
+      "senha": "senha123",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "2",
       "nome": "Maria Santos",
       "email": "maria.santos@exemplo.com",
       "senha": "senha123",
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "1734497964121",
+      "nome": "test",
+      "email": "test.tes@gmail.com",
+      "senha": "senha123",
+      "createdAt": "2024-12-18T04:59:24.121Z",
+      "updatedAt": "2024-12-18T04:59:24.121Z"
+    },
+    {
+      "id": "1734498710668",
+      "nome": "test",
+      "email": "test.ttes@gmail.com",
+      "senha": "senha123",
+      "createdAt": "2024-12-18T05:11:50.668Z",
+      "updatedAt": "2024-12-18T05:11:50.668Z"
     }
   ],
   "emprestimos": [
