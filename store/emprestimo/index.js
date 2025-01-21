@@ -7,6 +7,12 @@ export const useEmprestimosStore = defineStore("emprestimos", {
     emprestimosPorEstudante: [], // Lista de empréstimos de um estudante específico
   }),
 
+  getters: {
+    emprestimosComEstudantes: (state) => state.emprestimos,
+    emprestimosComEstudantes2: (state) => state.emprestimos2,
+    emprestimosDoEstudante: (state) => state.emprestimosPorEstudante,
+  },
+
   actions: {
     // Busca os empréstimos e combina com os estudantes para um livro específico
     async fetchEmprestimosPorLivro(livroId) {
@@ -222,11 +228,5 @@ export const useEmprestimosStore = defineStore("emprestimos", {
         console.error("Erro ao carregar dados dos empréstimos:", error);
       }
     },
-  },
-
-  getters: {
-    emprestimosComEstudantes: (state) => state.emprestimos,
-    emprestimosComEstudantes2: (state) => state.emprestimos2,
-    emprestimosDoEstudante: (state) => state.emprestimosPorEstudante,
   },
 });

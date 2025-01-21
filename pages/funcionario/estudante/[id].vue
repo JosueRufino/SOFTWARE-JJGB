@@ -285,7 +285,7 @@ const emprest = computed(() => useEmprestimos.emprestimosDoEstudante);
 onMounted(async () => {
   await useStudant.fetchStudentById(route.params.id);
   await useEmprestimos.fetchEmprestimosPendentesPorEstudante(route.params.id);
-  await useEmprestimos.fetchEmprestimosPorEstudante(route.params.id);
+  //await useEmprestimos.fetchEmprestimosPorEstudante(route.params.id);
 });
 
 // Método para formatar data
