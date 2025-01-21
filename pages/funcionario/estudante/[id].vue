@@ -51,7 +51,7 @@
               aria-controls="documentos"
               aria-selected="false"
             >
-              <i class="bi bi-file-earmark-text me-2"></i>Documentos
+              <i class="bi bi-file-earmark-text me-2"></i>Histórico
             </a>
           </li>
         </ul>
@@ -185,7 +185,7 @@
           >
             <div class="card">
               <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Documentos</h5>
+                <h5 class="mb-0">Histórico</h5>
               </div>
               <div class="card-body">
                 <div class="container mt-4">

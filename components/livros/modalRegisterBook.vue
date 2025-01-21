@@ -218,6 +218,10 @@ const validateForm = () => {
     throw new Error("O ano de publicação não pode ser maior que o ano atual.");
   }
 
+  if(form.ano_publicacao === 0 || form.ano_publicacao < 0){
+    throw new Error("O ano de publicação não pode ser menor ou igual a 0.");
+  }
+
   if (form.quantidade_total <= 0) {
     throw new Error("A quantidade total de livros deve ser maior que zero.");
   }
@@ -237,6 +241,8 @@ const handleSubmit = async () => {
       text: "Livro cadastrado com sucesso.",
       icon: "success",
       confirmButtonText: "OK",
+      showConfirmButton: false,
+      timer: 1500
     }).then(() => {
       // Fecha o modal
       const modal = document.getElementById("staticBackdropRegisterBook");

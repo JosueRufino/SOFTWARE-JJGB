@@ -14,7 +14,7 @@ export const useFuncionariosStore = defineStore("funcionarios", {
       const usuarioAutenticado = JSON.parse(localStorage.getItem("user"));
 
       // Se não houver usuário autenticado ou o usuário autenticado não for "Admin admin", não permitir o cadastro
-      if (!usuarioAutenticado || usuarioAutenticado.nome !== "Admin admin") {
+      if (!usuarioAutenticado || usuarioAutenticado.type !== 1) {
         Swal.fire({
           icon: "error",
           title: "Erro!",

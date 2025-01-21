@@ -15,7 +15,7 @@
           class="sidebar-profile-image"
         />
         <h3 class="sidebar-profile-name mb-0">{{ user?.nome }}</h3>
-        <p class="sidebar-profile-role mb-0">Administrador</p>
+        <p class="sidebar-profile-role mb-0">{{user?.type === 1 ? "Administrador": "Funcionário"}}</p>
       </div>
     </div>
     <div class="sidebar-menu">

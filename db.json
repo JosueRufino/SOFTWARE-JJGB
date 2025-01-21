@@ -224,113 +224,6 @@
       "status": true,
       "createdAt": "2024-11-12T20:15:00Z",
       "updatedAt": "2024-11-22T16:10:00Z"
-    },
-    {
-      "id": "ca2a",
-      "titulo": "dssds",
-      "autor": "dsds",
-      "isbn": "sdsd",
-      "ano_publicacao": 1,
-      "quantidade_disponivel": 1,
-      "subcategoria_id": 1,
-      "status": true,
-      "createdAt": "2024-12-04T11:22:41.840Z",
-      "updatedAt": "2024-12-04T11:22:41.840Z"
-    },
-    {
-      "id": "c3a2",
-      "titulo": "novo livro",
-      "autor": "Benicio Hossi",
-      "isbn": "sdsd",
-      "ano_publicacao": 2024,
-      "quantidade_disponivel": 1,
-      "subcategoria_id": 1,
-      "status": false,
-      "createdAt": "2024-12-06T19:44:53.263Z",
-      "updatedAt": "2024-12-06T19:44:53.263Z"
-    },
-    {
-      "id": "81a6",
-      "titulo": "Testa da Jandira",
-      "autor": "Dama do peperone",
-      "isbn": "peperone",
-      "ano_publicacao": 2024,
-      "quantidade_total": 3,
-      "quantidade_disponivel": 0,
-      "subcategoria_id": 1,
-      "status": false,
-      "createdAt": "2024-12-06T20:39:09.516Z",
-      "updatedAt": "2024-12-06T20:50:36.173Z"
-    },
-    {
-      "id": "6aa1",
-      "titulo": "Testa da Jandira",
-      "descricao": "11111111",
-      "autor": "dsds",
-      "isbn": "1111111111",
-      "ano_publicacao": 26,
-      "quantidade_total": 5,
-      "quantidade_disponivel": 3,
-      "subcategoria_id": "d645",
-      "status": true,
-      "createdAt": "2024-12-08T21:28:40.610Z",
-      "updatedAt": "2024-12-08T21:28:40.610Z"
-    },
-    {
-      "id": "3bca",
-      "titulo": "novo livro",
-      "descricao": "zubu",
-      "autor": "Benicio Hossi",
-      "isbn": "zubu",
-      "ano_publicacao": 2024,
-      "quantidade_total": 4,
-      "quantidade_disponivel": 0,
-      "subcategoria_id": "d645",
-      "status": true,
-      "createdAt": "2024-12-08T21:34:55.494Z",
-      "updatedAt": "2024-12-08T21:34:55.494Z"
-    },
-    {
-      "id": "2320",
-      "titulo": "novo livro",
-      "descricao": "ss",
-      "autor": "Dama do peperone",
-      "isbn": "ssss",
-      "ano_publicacao": 222,
-      "quantidade_total": 222,
-      "quantidade_disponivel": 0,
-      "subcategoria_id": "75d4",
-      "status": true,
-      "createdAt": "2024-12-08T21:37:24.055Z",
-      "updatedAt": "2024-12-08T21:37:24.055Z"
-    },
-    {
-      "id": "b60a",
-      "titulo": "sasa",
-      "descricao": "djbsdkjhbjs",
-      "autor": "ssass",
-      "isbn": "sdns-sdjsn-ds",
-      "ano_publicacao": 2024,
-      "quantidade_total": 2,
-      "quantidade_disponivel": 2,
-      "subcategoria_id": "1",
-      "status": true,
-      "createdAt": "2024-12-08T21:39:31.802Z",
-      "updatedAt": "2024-12-08T21:39:31.802Z"
-    },
-    {
-      "id": "3838",
-      "titulo": "coisas da vida",
-      "descricao": "novo livro",
-      "autor": "peperone",
-      "isbn": "1234456489103",
-      "ano_publicacao": 2023,
-      "quantidade_total": 3,
-      "quantidade_disponivel": 3,
-      "subcategoria_id": "d645",
-      "status": true,
-      "createdAt": "2024-12-10T22:46:16.662Z",
-      "updatedAt": "2024-12-10T22:46:16.662Z"
     }
   ],
   "categories": [
@@ -449,8 +342,8 @@
       "nome": "Genilson Daniel",
       "matricula": "20230001",
       "email": "yoga.daniel@exemplo.com",
-      "livros": -3,
-      "data_penalidade": "2024-12-08T18:33:58.978Z",
+      "livros": -4,
+      "data_penalidade": "2025-01-21T02:24:49.521Z",
       "penality": true,
       "createdAt": "2024-11-01T09:00:00Z",
       "updatedAt": "2024-11-10T12:00:00Z"
@@ -496,6 +389,7 @@
     {
       "id": "1",
       "nome": "Admin admin",
+      "type": 1,
       "email": "Admin.admin@exemplo.com",
       "senha": "senha123",
       "createdAt": "2024-11-01T09:00:00Z",
@@ -504,6 +398,7 @@
     {
       "id": "2",
       "nome": "Maria Santos",
+      "type": 0,
       "email": "maria.santos@exemplo.com",
       "senha": "senha123",
       "createdAt": "2024-11-01T09:00:00Z",
@@ -512,6 +407,7 @@
     {
       "id": "1734497964121",
       "nome": "test",
+      "type": 0,
       "email": "test.tes@gmail.com",
       "senha": "senha123",
       "createdAt": "2024-12-18T04:59:24.121Z",
@@ -520,6 +416,7 @@
     {
       "id": "1734498710668",
       "nome": "test",
+      "type": 0,
       "email": "test.ttes@gmail.com",
       "senha": "senha123",
       "createdAt": "2024-12-18T05:11:50.668Z",
@@ -542,7 +439,7 @@
       "estudante_id": 1,
       "data_emprestimo": "2024-12-01",
       "data_devolucao": "2024-12-04",
-      "data_devolvida": "2024-12-08T18:33:58.978Z",
+      "data_devolvida": "2025-01-21T02:24:42.969Z",
       "status": 1
     },
     {
@@ -578,7 +475,7 @@
       "estudante_id": 1,
       "data_emprestimo": "2024-12-07",
       "data_devolucao": "2024-12-10",
-      "data_devolvida": "2024-12-08T18:34:38.194Z",
+      "data_devolvida": "2025-01-21T02:24:49.521Z",
       "status": 1
     },
     {
