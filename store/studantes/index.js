@@ -22,7 +22,7 @@ export const useStudentStore = defineStore("student", {
     getTotalStudents: (state) =>
       state.filteredStudents.length || state.students.length,
     getStudantesByMatricula: (state) => state.filterByMatricula,
-  },                      
+  },
 
   actions: {
     // Buscar todos os estudantes
@@ -75,15 +75,15 @@ export const useStudentStore = defineStore("student", {
     async filterByMatricula(matricula) {
       this.loading = true;
       try {
-        const response = await $fetch("http://localhost:3001/estudantes", {
-          method: "GET",
-        });
+        const response = await $fetch(
+          `http://localhost:3001/estudantes?matricula=${matricula}`,
+          {
+            method: "GET",
+          }
+        );
+        console.log("estudante encontrado", response)
         if (response) {
-          const studants = response; // Dados recebidos
-          console.log(studants);
-
-          // Retorna os estudantes filtrados sem sobrescrever a função
-          return studants.filter((student) => student.matricula === matricula);
+          this.filterByMatricula = response; // Dados recebidos
         }
       } catch (error) {
         console.error("Erro ao filtrar por matrícula:", error);

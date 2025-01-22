@@ -1,13 +1,25 @@
 <template>
   <div>
     <!-- Modal -->
-    <div class="modal fade" id="listaEsperaModal" tabindex="-1" aria-labelledby="listaEsperaModalLabel"
-      aria-hidden="true">
+    <div
+      class="modal fade"
+      id="listaEsperaModal"
+      tabindex="-1"
+      aria-labelledby="listaEsperaModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="listaEsperaModalLabel">Adicionar na Lista de Espera</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="listaEsperaModalLabel">
+              Adicionar na Lista de Espera
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <form @submit.prevent="adicionarNaListaEspera">
             <div class="modal-body">
@@ -16,18 +28,36 @@
                 <legend>Dados do Livro</legend>
                 <div class="row">
                   <div class="mb-3 col">
-                    <label for="nomeLivro" class="form-label">Nome do Livro</label>
-                    <input type="text" id="nomeLivro" v-model="form.nomeLivro" class="form-control" required disabled />
+                    <label for="nomeLivro" class="form-label"
+                      >Nome do Livro</label
+                    >
+                    <input
+                      type="text"
+                      id="nomeLivro"
+                      v-model="form.nomeLivro"
+                      class="form-control"
+                      required
+                      disabled
+                    />
                   </div>
                   <div class="mb-3 col">
                     <label for="isbn" class="form-label">ISBN</label>
-                    <input type="text" id="isbn" v-model="form.isbn" class="form-control" required disabled />
+                    <input
+                      type="text"
+                      id="isbn"
+                      v-model="form.isbn"
+                      class="form-control"
+                      required
+                      disabled
+                    />
                   </div>
                 </div>
               </fieldset>
 
               <div class="mb-3">
-                <button type="button" class="btn btn-secondary" @click="fbook">Buscar Livro</button>
+                <button type="button" class="btn btn-secondary" @click="fbook">
+                  Buscar Livro
+                </button>
               </div>
 
               <!-- Dados do Estudante -->
@@ -35,29 +65,54 @@
                 <legend>Dados do Estudante</legend>
                 <div class="row">
                   <div class="mb-3 col">
-                    <label for="numeroMatricula" class="form-label">Número de Matrícula</label>
-                    <input type="text" id="numeroMatricula" v-model="form.numeroMatricula" class="form-control"
-                      required />
+                    <label for="numeroMatricula" class="form-label"
+                      >Número de Matrícula</label
+                    >
+                    <input
+                      type="text"
+                      id="numeroMatricula"
+                      v-model="form.numeroMatricula"
+                      class="form-control"
+                      required
+                    />
                   </div>
                   <div class="mb-3 col">
-                    <label for="nomeEstudante" class="form-label">Nome do Estudante</label>
-                    <input type="text" id="nomeEstudante" v-model="form.nomeEstudante" class="form-control" disabled />
+                    <label for="nomeEstudante" class="form-label"
+                      >Nome do Estudante</label
+                    >
+                    <input
+                      type="text"
+                      id="nomeEstudante"
+                      v-model="form.nomeEstudante"
+                      class="form-control"
+                      disabled
+                    />
                   </div>
                 </div>
               </fieldset>
 
               <div class="mb-3">
-                <button type="button" class="btn btn-secondary" @click="buscarEstudantePorMatricula">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  @click="buscarEstudantePorMatricula"
+                >
                   Buscar Estudante
                 </button>
               </div>
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
                 Cancelar
               </button>
-              <button type="submit" class="btn btn-primary">Adicionar na Lista de Espera</button>
+              <button type="submit" class="btn btn-primary">
+                Adicionar na Lista de Espera
+              </button>
             </div>
           </form>
         </div>
@@ -106,12 +161,15 @@ async function buscarEstudantePorMatricula() {
 
   try {
     await useEstudante.fetchStudents();
-    await useEstudante.filterByMatricula(matricula);
+    console.log("Estudantes carregados:", useEstudante.students);
 
+    await useEstudante.filterByMatricula(matricula);
     const estudante = useEstudante.getStudantesByMatricula;
+    console.log("Estudante filtrado:", estudante);
+
     if (estudante && estudante.length > 0) {
       form.value.nomeEstudante = estudante[0].nome;
-      estudanteId.value = Number(estudante[0].id); // Garante que o ID do estudante seja um número
+      estudanteId.value = Number(estudante[0].id);
       Swal.fire({
         icon: "success",
         title: "Estudante encontrado!",
@@ -136,18 +194,25 @@ async function buscarEstudantePorMatricula() {
   }
 }
 
+const fila = computed(() => filaEsperaStore.filaAtual);
+
 // Função para adicionar o estudante na lista de espera
 async function adicionarNaListaEspera() {
-  try {
-    if (!estudanteId.value) {
-      Swal.fire({
-        icon: "error",
-        title: "Estudante não selecionado",
-        text: "Busque o estudante antes de adicionar à lista de espera.",
-      });
-      return;
-    }
-
+  console.log("filssa", fila.value);
+  filaEsperaStore.fetchFilaPorLivro(1);
+  if (!estudanteId.value) {
+    Swal.fire({
+      icon: "error",
+      title: "Estudante não selecionado",
+      text: "Busque o estudante antes de adicionar à lista de espera.",
+    });
+    return;
+  }
+  console.log(
+    "verify",
+    await filaEsperaStore.verify(route.query.livroId, estudanteId.value)
+  );
+  if (!(await filaEsperaStore.verify(route.query.livroId, estudanteId.value))) {
     const novoRegistro = await filaEsperaStore.cadastrarNaFila({
       livroId: Number(route.query.livroId),
       estudanteId: estudanteId.value,
@@ -162,12 +227,13 @@ async function adicionarNaListaEspera() {
     resetarFormulario();
 
     fecharModal();
-  } catch (error) {
-    console.error("Erro ao adicionar na lista de espera:", error);
+  } else {
     Swal.fire({
-      icon: "error",
-      title: "Erro ao adicionar na lista de espera",
-      text: "Ocorreu um erro. Tente novamente.",
+      title: "Aviso",
+      text: "Aluno já se encontra na fila por este livro",
+      icon: "warning",
+      showConfirmButton: false,
+      timer: 2000,
     });
   }
 }
@@ -192,6 +258,7 @@ function fecharModal() {
 }
 
 onMounted(async () => {
+  await filaEsperaStore.fetchFilaPorLivro(Number(route.query.livroId));
   await useBook.fetchBookById(Number(route.query.livroId));
 });
 

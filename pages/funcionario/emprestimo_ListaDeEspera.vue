@@ -7,9 +7,7 @@
     </div>
     <div class="col">
       <div class="card border-0 mb-2" style="height: 50px">
-        <div
-          class="d-flex justify-content-end align-items-center h-100 px-2"
-        >
+        <div class="d-flex justify-content-end align-items-center h-100 px-2">
           <div>
             <input
               type="email"
@@ -22,8 +20,8 @@
         </div>
       </div>
       <div class="row w-100 gx-5 justify-content-start">
-        <LivrosModalEmprestarLivro/>
-        <LivrosModelAdicionarListaEspera/>
+        <LivrosModalEmprestarLivro />
+        <LivrosModelAdicionarListaEspera />
         <div
           v-if="paginatedBooks.length"
           class="col-3 mb-3"
@@ -49,10 +47,12 @@
 import { useCategoryStore } from "@/store/category/index";
 import { useSubcategoryStore } from "@/store/subcategory/index";
 import { useBookStore } from "@/store/books/index";
+import { useFilaEsperaStore } from "@/store/filaEspera/index";
 
 const useBook = useBookStore();
 const useCategory = useCategoryStore();
 const useSubcategory = useSubcategoryStore();
+const useFila = useFilaEsperaStore()
 
 const route = useRoute();
 const searchTerm = ref("");
@@ -122,6 +122,7 @@ watch(
   () => route.query,
   () => {
     console.log("mudou");
+    useFila.fetchFilaPorLivro(route.query.livroId)
     applyQueryFilters();
   }
 );

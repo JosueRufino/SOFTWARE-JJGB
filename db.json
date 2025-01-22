@@ -497,7 +497,44 @@
       "status": 0
     }
   ],
-  "filaEspera": [],
+  "filaEspera": [
+    {
+      "id": "70c8",
+      "livro_id": 1,
+      "estudante_id": 4,
+      "posicao": 1,
+      "notificado": false,
+      "createdAt": "2025-01-22T03:16:17.820Z",
+      "updatedAt": "2025-01-22T03:16:17.820Z"
+    },
+    {
+      "id": "e9f6",
+      "livro_id": 1,
+      "estudante_id": 3,
+      "posicao": 2,
+      "notificado": false,
+      "createdAt": "2025-01-22T03:18:08.907Z",
+      "updatedAt": "2025-01-22T03:18:08.907Z"
+    },
+    {
+      "id": "8e53",
+      "livro_id": 1,
+      "estudante_id": 2,
+      "posicao": 1,
+      "notificado": false,
+      "createdAt": "2025-01-22T03:58:34.685Z",
+      "updatedAt": "2025-01-22T03:58:34.685Z"
+    },
+    {
+      "id": "5997",
+      "livro_id": 1,
+      "estudante_id": 1,
+      "posicao": 3,
+      "notificado": false,
+      "createdAt": "2025-01-22T06:51:53.519Z",
+      "updatedAt": "2025-01-22T06:51:53.519Z"
+    }
+  ],
   "alertas": [
     {
       "id": "1",

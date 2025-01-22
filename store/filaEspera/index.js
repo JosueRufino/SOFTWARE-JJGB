@@ -1,10 +1,17 @@
 // stores/filaEspera.js
 import { defineStore } from "pinia";
-
+import Swal from "sweetalert2";
 export const useFilaEsperaStore = defineStore("filaEspera", {
   state: () => ({
     filaCompleta: [], // Dados combinados da fila de espera com estudantes
   }),
+
+  getters: {
+    // Getter para acessar a fila de espera carregada
+    filaAtual: (state) => {
+      return state.filaCompleta; // Retorna os dados carregados na última busca
+    },
+  },
 
   actions: {
     // Carregar fila de espera e estudantes apenas para um livro específico
@@ -34,15 +41,53 @@ export const useFilaEsperaStore = defineStore("filaEspera", {
           };
         });
 
-        console.log(this.filaCompleta);
+        console.log("fila no store", this.filaCompleta);
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
       }
     },
 
+    async verify(livroId, EstudanteId) {
+      console.log("no ma", livroId, EstudanteId);
+
+      await this.fetchFilaPorLivro(livroId); // Carregar a fila de espera para o livro
+      console.log("fila", this.filaCompleta);
+
+      // Verificar se o estudante já está na fila para o livro
+      const estudanteNaFila = this.filaCompleta.some((i) => {
+        console.log("object i", i);
+        console.log("with", livroId, EstudanteId);
+        return i.estudante_id === EstudanteId;
+      });
+
+      return estudanteNaFila; // Retorna true ou false dependendo da verificação
+    },
+
     // Cadastrar uma nova pessoa na fila de espera
     async cadastrarNaFila({ livroId, estudanteId }) {
       try {
+        // Verificar se o estudante já está na fila para o livro especificado
+        // console.log(livroId, estudanteId);
+        // const t = this.filaCompleta.find((i) => {
+        //   i.livro_id === livroId && i.estudante_id === estudanteId;
+        // });
+        // console.log(t, "tt")
+        // if (
+        //   this.filaCompleta.find((i) => {
+        //     return i.livro_id === livroId && i.estudante_id === estudanteId;
+        //   })
+        // ) {
+        //   Swal.fire({
+        //     title: "Aviso",
+        //     text: "Aluno já se encontra na fila por este livro",
+        //     icon: "warning",
+        //     showConfirmButton: false,
+        //     timer: 2000,
+        //   });
+
+        //   return;
+        // }
+
         // Determinar a próxima posição na fila
         const ultimaPosicao = this.filaCompleta.reduce(
           (max, item) => Math.max(max, item.posicao),
@@ -90,13 +135,6 @@ export const useFilaEsperaStore = defineStore("filaEspera", {
         console.error("Erro ao cadastrar na fila de espera:", error);
         throw error; // Lança o erro para que a interface possa lidar com ele
       }
-    },
-  },
-
-  getters: {
-    // Getter para acessar a fila de espera carregada
-    filaAtual: (state) => {
-      return state.filaCompleta; // Retorna os dados carregados na última busca
     },
   },
 });
