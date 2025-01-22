@@ -9,11 +9,11 @@
       "isbn": "978-3-16-148410-0",
       "ano_publicacao": 1605,
       "quantidade_total": 5,
-      "quantidade_disponivel": 4,
+      "quantidade_disponivel": 0,
       "subcategoria_id": 1,
-      "status": true,
+      "status": false,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2025-01-21T08:28:56.968Z"
+      "updatedAt": "2025-01-22T02:37:23.137Z"
     },
     {
       "id": "2",
@@ -24,11 +24,11 @@
       "isbn": "978-3-16-148410-1",
       "ano_publicacao": 1606,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
-      "subcategoria_id": " 1",
+      "quantidade_disponivel": 1,
+      "subcategoria_id": 1,
       "status": true,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-11-10T12:00:00Z"
+      "updatedAt": "2025-01-21T09:55:31.482Z"
     },
     {
       "id": "3",
@@ -39,11 +39,11 @@
       "isbn": "978-3-16-148410-2",
       "ano_publicacao": 1610,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
+      "quantidade_disponivel": 1,
       "subcategoria_id": 1,
       "status": true,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-12-07T19:53:27.419Z"
+      "updatedAt": "2025-01-21T09:01:39.012Z"
     },
     {
       "id": "4",
@@ -54,11 +54,11 @@
       "isbn": "978-3-16-148410-3",
       "ano_publicacao": 1620,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
+      "quantidade_disponivel": 2,
       "subcategoria_id": 1,
       "status": true,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-12-07T19:57:52.088Z"
+      "updatedAt": "2025-01-21T09:03:24.813Z"
     },
     {
       "id": "5",
@@ -69,11 +69,11 @@
       "isbn": "978-3-16-148410-4",
       "ano_publicacao": 1625,
       "quantidade_total": 3,
-      "quantidade_disponivel": 3,
+      "quantidade_disponivel": 1,
       "subcategoria_id": 2,
       "status": true,
       "createdAt": "2024-11-01T10:00:00Z",
-      "updatedAt": "2024-12-07T21:06:52.198Z"
+      "updatedAt": "2025-01-22T01:48:18.396Z"
     },
     {
       "id": "6",
@@ -342,7 +342,7 @@
       "nome": "Genilson Daniel",
       "matricula": "20230001",
       "email": "yoga.daniel@exemplo.com",
-      "livros": 0,
+      "livros": 1,
       "data_penalidade": null,
       "penality": true,
       "createdAt": "2024-11-01T09:00:00Z",
@@ -354,7 +354,7 @@
       "nome": "Josué Rufino",
       "matricula": "20220099",
       "email": "josue.rufino@exemplo.com",
-      "livros": 1,
+      "livros": 0,
       "data_penalidade": null,
       "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
@@ -366,7 +366,7 @@
       "nome": "Benicio Hossi",
       "matricula": "20221668",
       "email": "balumuca.hossi@exemplo.com",
-      "livros": 0,
+      "livros": 3,
       "data_penalidade": null,
       "penality": false,
       "createdAt": "2024-11-01T09:00:00Z",
@@ -376,7 +376,7 @@
       "id": "4",
       "imagem": "/uploads/estudantes/user.png",
       "nome": "Jandira Pena",
-      "matricula": "20220000",
+      "matricula": "20221234",
       "email": "testa.pena@exemplo.com",
       "livros": 0,
       "data_penalidade": null,
@@ -430,6 +430,69 @@
       "estudante_id": 2,
       "data_emprestimo": "2025-01-21",
       "data_devolucao": "2025-01-24",
+      "data_devolvida": "2025-01-21T08:52:21.535Z",
+      "status": 1
+    },
+    {
+      "id": "b791",
+      "livro_id": 2,
+      "estudante_id": 2,
+      "data_emprestimo": "2025-01-21",
+      "data_devolucao": "2025-01-24",
+      "data_devolvida": "2025-01-21T08:55:12.679Z",
+      "status": 1
+    },
+    {
+      "id": "473a",
+      "livro_id": 3,
+      "estudante_id": 1,
+      "data_emprestimo": "2025-01-21",
+      "data_devolucao": "2025-01-24",
+      "data_devolvida": "2025-01-21T08:59:56.873Z",
+      "status": 1
+    },
+    {
+      "id": "3693",
+      "livro_id": 3,
+      "estudante_id": 3,
+      "data_emprestimo": "2025-01-21",
+      "data_devolucao": "2025-01-24",
+      "data_devolvida": "2025-01-21T09:02:05.968Z",
+      "status": 1
+    },
+    {
+      "id": "c6ff",
+      "livro_id": 2,
+      "estudante_id": 3,
+      "data_emprestimo": "2025-01-21",
+      "data_devolucao": "2025-01-24",
+      "data_devolvida": "2025-01-21T09:56:55.835Z",
+      "status": 1
+    },
+    {
+      "id": "46f3",
+      "livro_id": 5,
+      "estudante_id": 2,
+      "data_emprestimo": "2025-01-22",
+      "data_devolucao": "2025-01-25",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "a695",
+      "livro_id": 1,
+      "estudante_id": 1,
+      "data_emprestimo": "2025-01-22",
+      "data_devolucao": "2025-01-25",
+      "data_devolvida": null,
+      "status": 0
+    },
+    {
+      "id": "cdfe",
+      "livro_id": 1,
+      "estudante_id": 3,
+      "data_emprestimo": "2025-01-22",
+      "data_devolucao": "2025-01-25",
       "data_devolvida": null,
       "status": 0
     }

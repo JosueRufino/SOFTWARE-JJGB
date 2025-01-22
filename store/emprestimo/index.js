@@ -5,45 +5,60 @@ export const useEmprestimosStore = defineStore("emprestimos", {
     emprestimos: [], // Lista de empréstimos combinada com os dados dos estudantes
     emprestimos2: [],
     emprestimosPorEstudante: [], // Lista de empréstimos de um estudante específico
+    emprestimosPorEstudante1: [],
   }),
 
   getters: {
     emprestimosComEstudantes: (state) => state.emprestimos,
     emprestimosComEstudantes2: (state) => state.emprestimos2,
     emprestimosDoEstudante: (state) => state.emprestimosPorEstudante,
+    emprestimosDoEstudante1: (state) => state.emprestimosPorEstudante1,
   },
 
   actions: {
     // Busca os empréstimos e combina com os estudantes para um livro específico
     async fetchEmprestimosPorLivro(livroId) {
       try {
-        const responseEmprestimos = await fetch(
-          `http://localhost:3001/emprestimos?livro_id=${livroId}`
+        const [responseEmprestimos, responseEstudantes] = await Promise.all([
+          $fetch(`http://localhost:3001/emprestimos?livro_id=${livroId}`),
+          $fetch("http://localhost:3001/estudantes"),
+        ]);
+
+        const emprestimos = responseEmprestimos;
+        const estudantes = responseEstudantes;
+
+        console.log("emprestimos", emprestimos);
+        console.log("estudantes", estudantes);
+
+        console.log(
+          "dentro",
+          emprestimos.filter((emprestimo) => emprestimo.status === 0)
         );
-        const responseEstudantes = await fetch(
-          "http://localhost:3001/estudantes"
+        console.log(
+          "fora",
+          emprestimos
+            .filter((emprestimo) => emprestimo.status === 0)
+            .map((item) => {
+              const estudante = estudantes.find(
+                (estudante) => parseInt(estudante.id) === item.estudante_id
+              );
+              return {
+                ...item,
+                estudante,
+              };
+            })
         );
-
-        if (!responseEmprestimos.ok || !responseEstudantes.ok) {
-          throw new Error("Erro ao buscar dados do servidor");
-        }
-
-        const emprestimos = await responseEmprestimos.json();
-        const estudantes = await responseEstudantes.json();
-
-        const auxEm = emprestimos.filter(
-          (emprestimo) => emprestimo.livro_id === 1 && emprestimo.status === 0
-        );
-
-        this.emprestimos = auxEm.map((item) => {
-          const estudante = estudantes.find(
-            (estudante) => estudante.id == item.estudante_id
-          );
-          return {
-            ...item,
-            estudante,
-          };
-        });
+        this.emprestimos = emprestimos
+          .filter((emprestimo) => emprestimo.status === 0)
+          .map((item) => {
+            const estudante = estudantes.find(
+              (estudante) => parseInt(estudante.id) === item.estudante_id
+            );
+            return {
+              ...item,
+              estudante,
+            };
+          });
         console.log("Empréstimos para o livro (status 0):", this.emprestimos);
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
@@ -52,35 +67,33 @@ export const useEmprestimosStore = defineStore("emprestimos", {
 
     async fetchEmprestimosPorLivroOthers(livroId) {
       try {
-        const responseEmprestimos = await fetch(
+        const responseEmprestimos = await $fetch(
           `http://localhost:3001/emprestimos?livro_id=${livroId}`
         );
-        const responseEstudantes = await fetch(
-          "http://localhost:3001/estudantes"
-        );
 
-        if (!responseEmprestimos.ok || !responseEstudantes.ok) {
-          throw new Error("Erro ao buscar dados do servidor");
-        }
+        const emprestimos = responseEmprestimos;
+        const estudantes = await $fetch("http://localhost:3001/estudantes", {
+          method: "GET",
+        });
 
-        const emprestimos = await responseEmprestimos.json();
-        const estudantes = await responseEstudantes.json();
+        console.log("estudantes1", estudantes);
 
         const auxEm = emprestimos.filter(
-          (emprestimo) =>
-            emprestimo.livro_id === livroId && emprestimo.status !== 0
+          (emprestimo) => emprestimo.status !== 0
         );
 
         this.emprestimos2 = auxEm.map((item) => {
           const estudante = estudantes.find(
-            (estudante) => estudante.id == item.estudante_id
+            (estudante) => parseInt(estudante.id) == item.estudante_id
           );
+          console.log("estudante", estudante);
           return {
             ...item,
             estudante,
           };
         });
-        console.log("Empréstimos para o livro (status 0):", this.emprestimos);
+
+        console.log("Empréstimos para o livro (status 1):", this.emprestimos2);
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
       }
@@ -104,7 +117,7 @@ export const useEmprestimosStore = defineStore("emprestimos", {
           (emprestimo) => emprestimo.status !== 0
         );
 
-        this.emprestimosPorEstudante = auxEm.map((item) => {
+        this.emprestimosPorEstudante1 = auxEm.map((item) => {
           const livro = livros.find((livro) => livro.id == item.livro_id);
           return {
             ...item,

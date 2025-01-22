@@ -279,13 +279,13 @@ const studant = computed(() => useStudant.getStudentById);
 const emprestimosPendentes = computed(
   () => useEmprestimos.emprestimosDoEstudante
 );
-const emprest = computed(() => useEmprestimos.emprestimosDoEstudante);
+const emprest = computed(() => useEmprestimos.emprestimosDoEstudante1);
 
 // Carregar os dados do estudante e dos empréstimos ao montar o componente
 onMounted(async () => {
   await useStudant.fetchStudentById(route.params.id);
   await useEmprestimos.fetchEmprestimosPendentesPorEstudante(route.params.id);
-  //await useEmprestimos.fetchEmprestimosPorEstudante(route.params.id);
+  await useEmprestimos.fetchEmprestimosPorEstudante(route.params.id);
 });
 
 // Método para formatar data

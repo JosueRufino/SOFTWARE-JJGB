@@ -22,7 +22,7 @@ export const useStudentStore = defineStore("student", {
     getTotalStudents: (state) =>
       state.filteredStudents.length || state.students.length,
     getStudantesByMatricula: (state) => state.filterByMatricula,
-  },
+  },                      
 
   actions: {
     // Buscar todos os estudantes

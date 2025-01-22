@@ -9,7 +9,7 @@
     <div class="card livro-card border-0 p-3 d-flex flex-row gap-3 align-items-start">
       <!-- Imagem do livro -->
       <div class="livro-image-container">
-        <img v-if="book && book.imagem" :src="book?.imagem" alt="Capa do livro" class="livro-image" />
+        <img v-if="book && book?.imagem" :src="book?.imagem" alt="Capa do livro" class="livro-image" />
       </div>
 
       <!-- Informações do livro -->
@@ -133,11 +133,11 @@
                 <tr v-for="(e, i) in EmprestimosComEstudantes" :key="i">
                   <th scope="row">{{ i + 1 }}</th>
                   <td>
-                    <img :src="e.estudante.imagem" style="max-height: 40px; border-radius: 50%" />
+                    <img :src="e.estudante?.imagem" style="max-height: 40px; border-radius: 50%" />
                   </td>
-                  <td>{{ e.estudante.nome }}</td>
-                  <td>{{ e.estudante.matricula }}</td>
-                  <td>{{ e.estudante.email }}</td>
+                  <td>{{ e.estudante?.nome }}</td>
+                  <td>{{ e.estudante?.matricula }}</td>
+                  <td>{{ e.estudante?.email }}</td>
                   <td>
                     <div class="bg-warning text-white p-1" style="border-radius: 20px; font-size: 0.8rem">
                       Em andamento
